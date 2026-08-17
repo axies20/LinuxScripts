@@ -5,7 +5,7 @@ source "$ROOT/lib/common.sh"
 require_fedora
 
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
-  err "Oh My Zsh is not installed. Run ./install.sh 09-zsh first."
+  err "Oh My Zsh is not installed. Run: ./install.sh zsh first."
   exit 1
 fi
 

@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 log()  { printf '\n\033[1;34m==> %s\033[0m\n' "$*"; }
-ok()   { printf '\033[1;32m✓ %s\033[0m\n' "$*"; }
 warn() { printf '\033[1;33mWARN: %s\033[0m\n' "$*" >&2; }
 err()  { printf '\033[1;31mERROR: %s\033[0m\n' "$*" >&2; }
 
@@ -18,18 +17,17 @@ require_sudo() {
         exit 1
     fi
 
-    # The top-level installer authenticates once and keeps sudo alive.
-    # Individual modules can still be executed directly; in that case they
-    # authenticate once here with an explicit explanation.
     if [ "${FEDORA_SETUP_SUDO_READY:-0}" = "1" ]; then
+        if ! sudo -n true >/dev/null 2>&1; then
+            err "sudo authorization expired while running non-interactively."
+            exit 1
+        fi
         return 0
     fi
 
-    if ! sudo -n true >/dev/null 2>&1; then
-        echo "Administrator access is required for this module."
-        echo "sudo may ask for your password once now."
-        sudo -v
-    fi
+    echo "Administrator access is required for this module."
+    echo "sudo may ask for your password once now:"
+    sudo -v
 }
 
 append_line_once() {

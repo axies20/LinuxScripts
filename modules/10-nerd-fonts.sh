@@ -1,78 +1,86 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
+
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 source "$ROOT/lib/common.sh"
-require_fedora; require_sudo
+require_fedora
 
 log "Installing Nerd Fonts"
-
-sudo dnf install -y fontconfig curl tar xz unzip
 
 FONT_ROOT="${XDG_DATA_HOME:-$HOME/.local/share}/fonts/NerdFonts"
 mkdir -p "$FONT_ROOT"
 
-# Space-separated Nerd Fonts release asset names. Override if desired, e.g.:
-#   NERD_FONTS="JetBrainsMono FiraCode" ./install.sh 10-nerd-fonts
-read -r -a fonts <<< "${NERD_FONTS:-JetBrainsMono FiraCode Meslo}"
+# Override when desired, for example:
+# NERD_FONTS="JetBrainsMono FiraCode" ./install.sh nerd-fonts
+NERD_FONTS="${NERD_FONTS:-JetBrainsMono FiraCode Meslo}"
+read -r -a fonts <<< "$NERD_FONTS"
 
-tmp_dir="$(mktemp -d)"
-trap 'rm -rf "$tmp_dir"' EXIT
-
-copy_font_files() {
-  local source_dir="$1" destination="$2"
-  while IFS= read -r -d '' font_file; do
-    cp -f "$font_file" "$destination/"
-  done < <(find "$source_dir" -type f \( -iname '*.ttf' -o -iname '*.otf' \) -print0)
+font_family_for_asset() {
+  case "$1" in
+    JetBrainsMono) printf '%s\n' 'JetBrainsMono Nerd Font' ;;
+    FiraCode)       printf '%s\n' 'FiraCode Nerd Font' ;;
+    Meslo)          printf '%s\n' 'MesloLGS NF' ;;
+    *)              printf '%s\n' "$1" ;;
+  esac
 }
 
 install_font() {
-  local font="$1"
-  local destination="$FONT_ROOT/$font"
-  local extract_dir="$tmp_dir/$font"
-  local xz_archive="$tmp_dir/$font.tar.xz"
-  local zip_archive="$tmp_dir/$font.zip"
-  local xz_url="https://github.com/ryanoasis/nerd-fonts/releases/latest/download/$font.tar.xz"
-  local zip_url="https://github.com/ryanoasis/nerd-fonts/releases/latest/download/$font.zip"
+  local asset="$1"
+  local family
+  family="$(font_family_for_asset "$asset")"
+  local target="$FONT_ROOT/$asset"
 
-  if find "$destination" -type f \( -iname '*.ttf' -o -iname '*.otf' \) -print -quit 2>/dev/null | grep -q .; then
-    echo "$font Nerd Font is already installed by fedora-setup; skipping."
+  if command -v fc-list >/dev/null 2>&1 && fc-list : family 2>/dev/null | grep -Fqi "$family"; then
+    ok "$family is already installed; skipping"
     return 0
   fi
 
-  log "Installing $font Nerd Font"
-  mkdir -p "$destination" "$extract_dir"
+  local tmp
+  tmp="$(mktemp -d)"
+  local archive="$tmp/$asset.zip"
+  local url="https://github.com/ryanoasis/nerd-fonts/releases/latest/download/$asset.zip"
 
-  # Nerd Fonts publishes compact tar.xz release archives. Fall back to ZIP if
-  # a particular family/release does not provide the XZ asset.
-  if curl -fL --retry 3 --retry-delay 2 --connect-timeout 15 \
-      -o "$xz_archive" "$xz_url"; then
-    tar -xJf "$xz_archive" -C "$extract_dir"
-  else
-    warn "$font.tar.xz is unavailable; falling back to ZIP."
-    curl -fL --retry 3 --retry-delay 2 --connect-timeout 15 \
-      -o "$zip_archive" "$zip_url"
-    unzip -q "$zip_archive" -d "$extract_dir"
-  fi
-
-  copy_font_files "$extract_dir" "$destination"
-
-  if ! find "$destination" -type f \( -iname '*.ttf' -o -iname '*.otf' \) -print -quit | grep -q .; then
-    err "No font files were found in the $font Nerd Font archive."
+  log "Downloading $family"
+  if ! curl -fL --retry 3 --retry-delay 2 --connect-timeout 15 \
+      -o "$archive" "$url"; then
+    rm -rf "$tmp"
+    err "Failed to download Nerd Font asset: $asset"
     return 1
   fi
+
+  rm -rf "$target"
+  mkdir -p "$target"
+  unzip -q -o "$archive" -d "$target"
+
+  # Keep only actual font files. Release archives may contain docs/licenses.
+  find "$target" -type f ! \( -iname '*.ttf' -o -iname '*.otf' \) -delete
+  find "$target" -type d -empty -delete || true
+  rm -rf "$tmp"
+
+  ok "$family installed"
 }
 
 for font in "${fonts[@]}"; do
   install_font "$font"
 done
 
-log "Refreshing the user font cache"
-fc-cache -f "$FONT_ROOT"
+if command -v fc-cache >/dev/null 2>&1; then
+  log "Refreshing font cache"
+  fc-cache -f "$FONT_ROOT" >/dev/null
+else
+  warn "fc-cache is unavailable. Install fontconfig and refresh the font cache manually."
+fi
 
-echo
-echo "Installed Nerd Font families:"
-fc-list : family | grep -Ei 'JetBrainsMono Nerd Font|FiraCode Nerd Font|Meslo.*Nerd Font' | sort -u | head -n 30 || true
+log "Installed Nerd Font families"
+if command -v fc-list >/dev/null 2>&1; then
+  for font in "${fonts[@]}"; do
+    family="$(font_family_for_asset "$font")"
+    if fc-list : family 2>/dev/null | grep -Fqi "$family"; then
+      printf '  ✓ %s\n' "$family"
+    else
+      printf '  ? %s (font cache may need a new login)\n' "$family"
+    fi
+  done
+fi
 
-echo
-echo "JetBrainsMono Nerd Font is the recommended default for the terminal/IDE console."
-echo "Select it in your terminal profile; the installer does not change GNOME UI fonts."
+echo "Choose a Nerd Font in your terminal profile. MesloLGS NF is recommended for Powerlevel10k."

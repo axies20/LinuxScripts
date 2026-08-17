@@ -1,7 +1,4 @@
 # Minimal development-oriented Starship prompt for Fedora/.NET/Aspire.
-# Nerd Font glyphs require a Nerd Font to be selected in the terminal profile.
-"$schema" = "https://starship.rs/config-schema.json"
-
 add_newline = true
 command_timeout = 1000
 
@@ -10,11 +7,7 @@ $directory\
 $git_branch\
 $git_status\
 $dotnet\
-$golang\
 $nodejs\
-$python\
-$php\
-$rust\
 $container\
 $cmd_duration\
 $line_break\
@@ -23,46 +16,27 @@ $character"""
 [directory]
 truncation_length = 4
 truncate_to_repo = false
-read_only = " 󰌾"
 
 [git_branch]
 format = " [$symbol$branch]($style)"
-symbol = " "
+symbol = "git:"
 
 [git_status]
 format = "([$all_status$ahead_behind]($style))"
 
 [dotnet]
-format = " [$symbol$version]($style)"
-symbol = " "
-
-[golang]
-format = " [$symbol$version]($style)"
-symbol = " "
+format = " [.NET $version]($style)"
 
 [nodejs]
-format = " [$symbol$version]($style)"
-symbol = " "
-
-[python]
-format = " [$symbol$version]($style)"
-symbol = " "
-
-[php]
-format = " [$symbol$version]($style)"
-symbol = " "
-
-[rust]
-format = " [$symbol$version]($style)"
-symbol = "󱘗 "
+format = " [Node $version]($style)"
 
 [container]
 format = " [$symbol$name]($style)"
-symbol = " "
+symbol = "container:"
 
 [cmd_duration]
 min_time = 2000
-format = " [󱎫 $duration]($style)"
+format = " [$duration]($style)"
 
 [character]
 success_symbol = "[❯](bold green)"

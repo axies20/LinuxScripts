@@ -13,7 +13,7 @@ if ! command -v starship >/dev/null 2>&1; then
   else
     warn "Fedora package 'starship' is unavailable; using the official user-local installer."
     mkdir -p "$HOME/.local/bin"
-    curl -sS https://starship.rs/install.sh | sh -s -- -y -b "$HOME/.local/bin"
+    curl -fsSL https://starship.rs/install.sh | sh -s -- --yes --bin-dir "$HOME/.local/bin"
   fi
 fi
 

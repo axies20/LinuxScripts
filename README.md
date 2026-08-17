@@ -6,13 +6,14 @@ Modular Fedora Workstation bootstrap for a .NET/Aspire development machine.
 
 - Podman instead of Docker Engine; rootless/daemonless by default.
 - .NET 10 SDK from Fedora repositories.
-- Aspire CLI with `ASPIRE_CONTAINER_RUNTIME=podman` and Linux certificate trust path.
+- Aspire CLI installed as the `Aspire.Cli` .NET global tool.
+- Aspire configured for Podman and Linux development-certificate trust.
 - Node.js/npm with a user-owned npm prefix, then OpenAI Codex CLI.
 - Zsh + Oh My Zsh with Starship as the default prompt.
-- JetBrainsMono, FiraCode and Meslo Nerd Fonts installed per-user for terminal/IDE glyph support.
 - Powerlevel10k is kept as an optional alternative in `optional/powerlevel10k.sh`.
+- Nerd Fonts: JetBrainsMono, FiraCode and MesloLGS NF.
 - GNOME, Nautilus, Flatpak apps, RPM Fusion codecs and optional NVIDIA drivers.
-- Local user MIME pack for developer formats and selected Windows formats.
+- Local user MIME catalog for development languages/tools and selected Windows formats.
 - No automatic reboot.
 
 ## Run everything
@@ -22,36 +23,25 @@ chmod +x install.sh modules/*.sh diagnostics/*.sh optional/*.sh
 ./install.sh
 ```
 
+The full installer is non-interactive between modules. It may request the sudo password once at the beginning, then continues automatically.
+
 ## Run selected modules
 
-```bash
-./install.sh 05-podman 06-dotnet 07-aspire
-./install.sh 09-zsh 10-nerd-fonts 11-starship
-./install.sh 16-mime
-```
-
-
-## Nerd Fonts
-
-The default install adds three Nerd Font families for the current user:
-
-- **JetBrainsMono Nerd Font** — recommended default for the terminal and IDE console.
-- **FiraCode Nerd Font** — alternative programming font with ligatures.
-- **Meslo Nerd Font** — useful with the optional Powerlevel10k prompt.
-
-They are installed under:
-
-```text
-~/.local/share/fonts/NerdFonts/
-```
-
-The installer prefers the compact Nerd Fonts `tar.xz` release archives and falls back to ZIP when needed. The font cache is refreshed automatically with `fc-cache`. The setup deliberately does not change the GNOME interface font or force a terminal profile font. Select **JetBrainsMono Nerd Font** (preferably a Mono variant when your terminal exposes one) in the terminal settings.
-
-To install only a subset, override `NERD_FONTS`:
+Module numbers are only installation order. Prefer stable names:
 
 ```bash
-NERD_FONTS="JetBrainsMono FiraCode" ./install.sh 10-nerd-fonts
+./install.sh podman dotnet aspire
+./install.sh zsh nerd-fonts starship
+./install.sh mime
 ```
+
+List all current modules:
+
+```bash
+./install.sh --list
+```
+
+Old numbered names are also resolved by semantic name when possible, but scripts and documentation should use stable names.
 
 ## Zsh and prompt
 
@@ -81,7 +71,7 @@ To install and switch to Powerlevel10k instead:
 ./optional/powerlevel10k.sh
 ```
 
-After opening a new terminal:
+Then open a new terminal and run:
 
 ```bash
 p10k configure
@@ -94,89 +84,98 @@ sed -i 's/FEDORA_PROMPT_ENGINE="powerlevel10k"/FEDORA_PROMPT_ENGINE="starship"/'
 exec zsh
 ```
 
-## Important after install
+## Aspire
 
-Log out and log back in (or reboot) so the default shell/session changes are applied. If NVIDIA packages were installed, allow `akmods` to finish before rebooting.
-
-Then:
+Aspire is installed through the official .NET global tool package:
 
 ```bash
-aspire doctor
-./diagnostics/check-environment.sh
-./diagnostics/check-mime.sh
+dotnet tool install -g Aspire.Cli
+```
+
+The setup adds:
+
+```bash
+export ASPIRE_CONTAINER_RUNTIME=podman
+export SSL_CERT_DIR="${SSL_CERT_DIR:+$SSL_CERT_DIR:}/etc/pki/tls/certs:$HOME/.aspnet/dev-certs/trust"
+```
+
+Certificate refresh is executed non-interactively:
+
+```bash
+aspire certs clean --non-interactive --nologo
+aspire certs trust --non-interactive --nologo
 ```
 
 ## MIME pack
 
-Installed per-user into:
+MIME definitions are stored as separate files in:
+
+```text
+config/mime/
+```
+
+The `mime` module installs **all** XML files from that directory into:
 
 ```text
 ~/.local/share/mime/packages/
 ```
 
-The catalog is split by language/category in `config/mime/` and covers .NET, Go, Python, PHP, Node.js/JavaScript/TypeScript, JVM languages, C/C++/Rust/Zig/Swift, scripting languages, SQL/data formats, API/infra formats, containers/Podman, build tools, AI/template formats, and selected Windows-specific formats.
-
-The setup deliberately does **not** force a default editor. Once MIME definitions are installed, Nautilus can keep a separate default application for each MIME type:
-
-1. Right-click a file.
-2. Choose **Open With**.
-3. Select Rider, VS Code, Zed, GNOME Text Editor, or another application.
-4. Choose **Set as Default** when desired.
-
-This means choosing Rider for `text/x-csharp` does not also change Python, Go, PHP, or generic text files. Existing Fedora/shared-mime-info types are extended where appropriate instead of inventing incompatible duplicates.
-
-`windows-extra.xml` remains intentionally selective: legacy aliases such as multiple MIME names for MP3/PNG/AVI are left to Fedora/shared-mime-info.
-
-Run the catalog diagnostic with:
+Run or reapply it with:
 
 ```bash
-./diagnostics/check-mime.sh
+./install.sh mime
 ```
 
-To see which application is currently the default for the main developer MIME types:
+Before installing, the module removes only previous `fedora-setup-*.xml` files, so deleted or renamed definitions do not remain stale.
+
+The Windows list is intentionally not copied verbatim: legacy aliases such as multiple MIME names for MP3/PNG/AVI are left to Fedora/shared-mime-info. `windows-extra.xml` focuses on Windows-specific formats useful for Nautilus recognition.
+
+## Nerd Fonts
+
+The `nerd-fonts` module installs user-local fonts into:
+
+```text
+~/.local/share/fonts/NerdFonts
+```
+
+Default families:
+
+- JetBrainsMono Nerd Font
+- FiraCode Nerd Font
+- MesloLGS NF (recommended for Powerlevel10k)
+
+Run:
 
 ```bash
-./diagnostics/check-mime-defaults.sh
+./install.sh nerd-fonts
+```
+
+Install only a subset:
+
+```bash
+NERD_FONTS="JetBrainsMono FiraCode" ./install.sh nerd-fonts
 ```
 
 ## Podman socket
 
-`podman.socket` is intentionally not enabled. Aspire can use Podman directly. If a future tool requires a Docker-compatible API, enable it explicitly:
+`podman.socket` is intentionally not enabled by default. Aspire can use Podman directly. If a future tool specifically requires a Docker-compatible API:
 
 ```bash
 systemctl --user enable --now podman.socket
 export DOCKER_HOST="unix://$XDG_RUNTIME_DIR/podman/podman.sock"
 ```
 
-## Interactive prompts
+## Diagnostics
 
-A normal full installation is designed to run continuously:
-
-```bash
-./install.sh
-```
-
-You do **not** need to press Enter between modules. The installer authenticates
-with `sudo` once at startup, keeps that authorization alive while it runs, and
-then continues from one module to the next automatically.
-
-The only normal prompt during a full run may be the initial `sudo` password
-request. It is preceded by an explanation in the terminal.
-
-When a module is run directly, for example:
+After installation:
 
 ```bash
-./modules/05-podman.sh
+aspire doctor
+./diagnostics/check-environment.sh
+./diagnostics/check-mime.sh
+./diagnostics/check-mime-defaults.sh
 ```
 
-that module may request `sudo` once because it was started outside the main
-installer.
+## Important after install
 
-The optional Powerlevel10k configurator remains intentionally interactive:
-
-```bash
-./optional/powerlevel10k.sh
-```
-
-because `p10k configure` is a visual configuration wizard. It is not executed
-by the default installation.
+Log out and log back in (or reboot) so the default shell/session changes are applied. If NVIDIA packages were installed, allow `akmods` to finish before rebooting.

@@ -6,10 +6,12 @@ require_fedora; require_sudo
 
 log "Installing Zsh + Oh My Zsh"
 sudo dnf install -y zsh git curl util-linux-user
-export RUNZSH=no CHSH=no KEEP_ZSHRC=yes
 
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  RUNZSH=no \
+  CHSH=no \
+  KEEP_ZSHRC=yes \
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 fi
 
 ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
@@ -24,7 +26,7 @@ if [ -f "$HOME/.zshrc" ]; then
 fi
 
 cat > "$HOME/.zshenv" <<'EOF_ZENV'
-export PATH="$HOME/.local/bin:$HOME/.aspire/bin:$HOME/.local/npm/bin:$HOME/.dotnet/tools:$PATH"
+export PATH="$HOME/.local/bin:$HOME/.local/npm/bin:$HOME/.dotnet/tools:$PATH"
 export ASPIRE_CONTAINER_RUNTIME=podman
 export SSL_CERT_DIR="${SSL_CERT_DIR:+$SSL_CERT_DIR:}/etc/pki/tls/certs:$HOME/.aspnet/dev-certs/trust"
 export FEDORA_PROMPT_ENGINE="${FEDORA_PROMPT_ENGINE:-starship}"
@@ -73,13 +75,11 @@ alias l='ls -CF'
 alias cls='clear'
 EOF_ZRC
 
-if [ "$(basename "${SHELL:-}")" != "zsh" ]; then
-  zsh_path="$(command -v zsh)"
-  if sudo usermod --shell "$zsh_path" "$USER"; then
-    echo "Default login shell set to $zsh_path (effective after the next login)."
-  else
-    warn "Could not change the default shell automatically."
-  fi
+zsh_path="$(command -v zsh)"
+current_shell="$(getent passwd "$USER" | cut -d: -f7)"
+if [ "$current_shell" != "$zsh_path" ]; then
+  log "Setting Zsh as the default shell for $USER"
+  sudo usermod --shell "$zsh_path" "$USER"
 fi
 
 echo "Zsh configured. Starship is the default prompt engine and is installed by the next module."
