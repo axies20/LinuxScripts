@@ -15,7 +15,13 @@ dotnet --info
 log "Installing/updating .NET global tools"
 tools=(dotnet-ef dotnet-format coverlet.console dotnet-reportgenerator-globaltool)
 for tool in "${tools[@]}"; do
-  if dotnet tool list -g | awk 'NR>2 {print $1}' | grep -qx "$tool"; then
+  installed_version="$(dotnet_global_tool_version "$tool")"
+  latest_version="$(nuget_latest_stable_version "$tool" || true)"
+
+  if [ -n "$installed_version" ] && [ "$installed_version" = "$latest_version" ]; then
+    ok "$tool $installed_version is already the latest version; skipping"
+  elif [ -n "$installed_version" ]; then
+    [ -n "$latest_version" ] || warn "Could not determine the latest $tool version; asking dotnet to check."
     dotnet tool update -g "$tool" || warn "Could not update $tool"
   else
     dotnet tool install -g "$tool"

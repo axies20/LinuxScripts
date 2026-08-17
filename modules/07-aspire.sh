@@ -11,8 +11,14 @@ if ! command -v dotnet >/dev/null 2>&1; then
   exit 1
 fi
 
-log "Installing/updating Aspire CLI as a .NET global tool"
-if dotnet tool list -g | awk 'NR>2 {print tolower($1)}' | grep -qx 'aspire.cli'; then
+log "Checking Aspire CLI"
+installed_version="$(dotnet_global_tool_version Aspire.Cli)"
+latest_version="$(nuget_latest_stable_version Aspire.Cli || true)"
+
+if [ -n "$installed_version" ] && [ "$installed_version" = "$latest_version" ]; then
+  ok "Aspire CLI $installed_version is already the latest version; skipping download"
+elif [ -n "$installed_version" ]; then
+  [ -n "$latest_version" ] || warn "Could not determine the latest Aspire CLI version; asking dotnet to check."
   dotnet tool update -g Aspire.Cli
 else
   dotnet tool install -g Aspire.Cli
