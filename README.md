@@ -96,8 +96,11 @@ The setup adds:
 
 ```bash
 export ASPIRE_CONTAINER_RUNTIME=podman
-export SSL_CERT_DIR="${SSL_CERT_DIR:+$SSL_CERT_DIR:}/etc/pki/tls/certs:$HOME/.aspnet/dev-certs/trust"
 ```
+
+The development certificate is managed by Aspire without globally overriding
+`SSL_CERT_DIR`, because that variable can break applications with bundled TLS
+libraries (including Steam).
 
 Certificate refresh is executed non-interactively:
 

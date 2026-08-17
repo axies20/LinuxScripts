@@ -138,21 +138,7 @@ cat > "$HOME/.zshenv" <<'EOF_ZENV'
 export PATH="$HOME/.local/bin:$HOME/.local/npm/bin:$HOME/.dotnet/tools:$PATH"
 
 export ASPIRE_CONTAINER_RUNTIME=podman
-
-# Fedora system CA certificates + ASP.NET/Aspire development certificates.
-case ":${SSL_CERT_DIR:-}:" in
-  *":/etc/pki/tls/certs:"*) ;;
-  *)
-    export SSL_CERT_DIR="${SSL_CERT_DIR:+$SSL_CERT_DIR:}/etc/pki/tls/certs"
-    ;;
-esac
-
-case ":${SSL_CERT_DIR:-}:" in
-  *":$HOME/.aspnet/dev-certs/trust:"*) ;;
-  *)
-    export SSL_CERT_DIR="${SSL_CERT_DIR:+$SSL_CERT_DIR:}$HOME/.aspnet/dev-certs/trust"
-    ;;
-esac
+unset SSL_CERT_DIR
 
 export FEDORA_PROMPT_ENGINE="${FEDORA_PROMPT_ENGINE:-starship}"
 EOF_ZENV

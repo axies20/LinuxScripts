@@ -26,10 +26,8 @@ fi
 
 append_line_once 'export PATH="$HOME/.dotnet/tools:$PATH"' "$HOME/.bashrc"
 append_line_once 'export ASPIRE_CONTAINER_RUNTIME=podman' "$HOME/.bashrc"
-append_line_once 'export SSL_CERT_DIR="${SSL_CERT_DIR:+$SSL_CERT_DIR:}/etc/pki/tls/certs:$HOME/.aspnet/dev-certs/trust"' "$HOME/.bashrc"
 
 export ASPIRE_CONTAINER_RUNTIME=podman
-export SSL_CERT_DIR="${SSL_CERT_DIR:+$SSL_CERT_DIR:}/etc/pki/tls/certs:$HOME/.aspnet/dev-certs/trust"
 
 if ! command -v aspire >/dev/null 2>&1; then
   err "Aspire CLI was installed but is not available on PATH. Expected: $HOME/.dotnet/tools/aspire"
