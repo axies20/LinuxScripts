@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+  <mime-type type="text/x-rego"><comment>Open Policy Agent Rego policy</comment><sub-class-of type="text/plain"/><glob pattern="*.rego"/></mime-type>
+  <mime-type type="text/x-cue"><comment>CUE configuration</comment><sub-class-of type="text/plain"/><glob pattern="*.cue"/></mime-type>
+  <mime-type type="text/x-nix"><comment>Nix expression</comment><sub-class-of type="text/plain"/><glob pattern="*.nix"/></mime-type>
+  <mime-type type="text/x-typst"><comment>Typst document</comment><sub-class-of type="text/plain"/><glob pattern="*.typ"/></mime-type>
+  <mime-type type="text/x-gleam"><comment>Gleam source code</comment><sub-class-of type="text/plain"/><glob pattern="*.gleam"/></mime-type>
+  <mime-type type="text/x-odin"><comment>Odin source code</comment><sub-class-of type="text/plain"/><glob pattern="*.odin"/></mime-type>
+  <mime-type type="text/x-mojo"><comment>Mojo source code</comment><sub-class-of type="text/plain"/><glob pattern="*.mojo"/></mime-type>
+  <mime-type type="text/x-go-template"><comment>Go templ component</comment><sub-class-of type="text/plain"/><glob pattern="*.templ"/></mime-type>
+</mime-info>

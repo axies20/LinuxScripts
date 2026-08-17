@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Open Empty File by Extension
+Comment=Open an empty file with the default application for its filename extension
+Icon=text-x-generic
+Exec="@HELPER@" %F
+Terminal=false
+NoDisplay=true
+MimeType=application/x-zerosize;

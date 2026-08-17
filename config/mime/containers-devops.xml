@@ -17,4 +17,30 @@
     <comment>systemd unit</comment><sub-class-of type="text/plain"/>
     <glob pattern="*.service"/><glob pattern="*.socket"/><glob pattern="*.timer"/><glob pattern="*.target"/><glob pattern="*.mount"/><glob pattern="*.automount"/><glob pattern="*.path"/><glob pattern="*.slice"/><glob pattern="*.scope"/>
   </mime-type>
+  <mime-type type="text/x-groovy">
+    <comment>Groovy source or Jenkins pipeline</comment><sub-class-of type="text/plain"/>
+    <glob pattern="Jenkinsfile" weight="90"/><glob pattern="Jenkinsfile.*" weight="80"/>
+  </mime-type>
+  <mime-type type="application/x-ruby">
+    <comment>Ruby source or Vagrant configuration</comment><sub-class-of type="text/plain"/>
+    <glob pattern="Vagrantfile" weight="90"/>
+  </mime-type>
+  <mime-type type="text/x-starlark">
+    <comment>Starlark source or Tilt configuration</comment><sub-class-of type="text/plain"/>
+    <glob pattern="Tiltfile" weight="90"/>
+  </mime-type>
+  <mime-type type="text/x-earthfile">
+    <comment>Earthly build definition</comment><sub-class-of type="text/plain"/>
+    <glob pattern="Earthfile" weight="90"/><glob pattern="Earthfile.*" weight="80"/>
+  </mime-type>
+  <mime-type type="application/x-taskfile+yaml">
+    <comment>Task task runner definition</comment><sub-class-of type="application/yaml"/>
+    <glob pattern="Taskfile.yml" weight="90"/><glob pattern="Taskfile.yaml" weight="90"/>
+    <glob pattern="Taskfile.dist.yml" weight="90"/><glob pattern="Taskfile.dist.yaml" weight="90"/>
+  </mime-type>
+  <mime-type type="application/x-compose+yaml">
+    <comment>Compose configuration</comment><sub-class-of type="application/yaml"/>
+    <glob pattern="docker-compose.yml" weight="90"/><glob pattern="docker-compose.yaml" weight="90"/>
+    <glob pattern="compose.yml" weight="90"/><glob pattern="compose.yaml" weight="90"/>
+  </mime-type>
 </mime-info>

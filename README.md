@@ -128,6 +128,13 @@ Run or reapply it with:
 
 Before installing, the module removes only previous `fedora-setup-*.xml` files, so deleted or renamed definitions do not remain stale.
 
+GNOME normally classifies every zero-byte file as `application/x-zerosize`,
+ignoring its extension for application selection. The MIME module installs a
+small handler for that special type. It determines the type from the filename
+and opens the original empty file with the application already configured for
+that type—for example, an empty `.cs` uses the default C# application and an
+empty `.md` uses the default Markdown application.
+
 The Windows list is intentionally not copied verbatim: legacy aliases such as multiple MIME names for MP3/PNG/AVI are left to Fedora/shared-mime-info. `windows-extra.xml` focuses on Windows-specific formats useful for Nautilus recognition.
 
 ## Nerd Fonts

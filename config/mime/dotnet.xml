@@ -51,4 +51,12 @@
     <comment>ASP.NET Razor view</comment><sub-class-of type="text/html"/>
     <glob pattern="*.cshtml"/>
   </mime-type>
+  <mime-type type="text/x-vbhtml">
+    <comment>ASP.NET Visual Basic Razor view</comment><sub-class-of type="text/html"/>
+    <glob pattern="*.vbhtml"/>
+  </mime-type>
+  <mime-type type="text/x-cake">
+    <comment>Cake build script</comment><sub-class-of type="text/x-csharp"/>
+    <glob pattern="*.cake"/>
+  </mime-type>
 </mime-info>

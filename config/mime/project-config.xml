@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+  <mime-type type="text/markdown">
+    <comment>Markdown document</comment><sub-class-of type="text/plain"/>
+    <glob pattern="*.md"/><glob pattern="*.markdown"/><glob pattern="*.mdown"/><glob pattern="*.mkd"/>
+  </mime-type>
+  <mime-type type="text/mdx">
+    <comment>MDX document</comment><sub-class-of type="text/markdown"/><glob pattern="*.mdx"/>
+  </mime-type>
+  <mime-type type="text/x-dotenv">
+    <comment>Dotenv configuration</comment><sub-class-of type="text/plain"/>
+    <glob pattern=".env" weight="90"/><glob pattern=".env.*" weight="80"/>
+  </mime-type>
+  <mime-type type="text/x-editorconfig">
+    <comment>EditorConfig configuration</comment><sub-class-of type="text/plain"/>
+    <glob pattern=".editorconfig" weight="90"/><glob pattern="*.editorconfig"/>
+  </mime-type>
+  <mime-type type="text/x-git-ignore">
+    <comment>Git ignore rules</comment><sub-class-of type="text/plain"/>
+    <glob pattern=".gitignore" weight="90"/><glob pattern="*.gitignore"/>
+  </mime-type>
+  <mime-type type="text/x-git-attributes">
+    <comment>Git attributes</comment><sub-class-of type="text/plain"/>
+    <glob pattern=".gitattributes" weight="90"/><glob pattern="*.gitattributes"/>
+  </mime-type>
+  <mime-type type="text/x-git-modules">
+    <comment>Git submodule configuration</comment><sub-class-of type="text/plain"/>
+    <glob pattern=".gitmodules" weight="90"/>
+  </mime-type>
+</mime-info>
