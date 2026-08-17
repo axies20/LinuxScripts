@@ -1,22 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
   <mime-type type="application/x-php">
-    <comment>PHP source code</comment>
-    <sub-class-of type="text/plain"/>
-    <glob pattern="*.php"/>
-    <glob pattern="*.php3"/>
-    <glob pattern="*.php4"/>
-    <glob pattern="*.php5"/>
-    <glob pattern="*.phtml"/>
-    <glob pattern="*.phps"/>
+    <comment>PHP source code</comment><sub-class-of type="text/plain"/>
+    <glob pattern="*.php"/><glob pattern="*.php3"/><glob pattern="*.php4"/><glob pattern="*.php5"/><glob pattern="*.phtml"/><glob pattern="*.phps"/>
   </mime-type>
   <mime-type type="text/x-blade">
-    <comment>Laravel Blade template</comment>
-    <sub-class-of type="text/plain"/>
-    <glob pattern="*.blade.php" weight="90"/>
+    <comment>Laravel Blade template</comment><sub-class-of type="text/plain"/><glob pattern="*.blade.php" weight="90"/>
   </mime-type>
   <mime-type type="application/x-php-archive">
-    <comment>PHP archive</comment>
-    <glob pattern="*.phar"/>
+    <comment>PHP archive</comment><glob pattern="*.phar"/>
   </mime-type>
 </mime-info>

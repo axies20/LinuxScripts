@@ -1,126 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
-  <mime-type type="application/x-shellscript">
-    <comment>Shell script</comment>
-    <sub-class-of type="text/plain"/>
-    <glob pattern="*.sh"/>
-  </mime-type>
-  <mime-type type="text/x-bash">
-    <comment>Bash script or configuration</comment>
-    <sub-class-of type="application/x-shellscript"/>
-    <glob pattern="*.bash"/>
-    <glob pattern=".bashrc" weight="90"/>
-    <glob pattern=".bash_profile" weight="90"/>
-    <glob pattern=".bash_logout" weight="90"/>
-  </mime-type>
-  <mime-type type="text/x-zsh">
-    <comment>Zsh script or configuration</comment>
-    <sub-class-of type="application/x-shellscript"/>
-    <glob pattern="*.zsh"/>
-    <glob pattern=".zshrc" weight="90"/>
-    <glob pattern=".zshenv" weight="90"/>
-    <glob pattern=".zprofile" weight="90"/>
-    <glob pattern=".zlogin" weight="90"/>
-    <glob pattern=".zlogout" weight="90"/>
-  </mime-type>
-  <mime-type type="application/x-fishscript">
-    <comment>Fish shell script</comment>
-    <sub-class-of type="text/plain"/>
-    <glob pattern="*.fish"/>
-  </mime-type>
-  <mime-type type="application/x-powershell">
-    <comment>PowerShell source code</comment>
-    <sub-class-of type="text/plain"/>
-    <glob pattern="*.ps1"/>
-    <glob pattern="*.psm1"/>
-    <glob pattern="*.psd1"/>
-  </mime-type>
-  <mime-type type="application/x-ruby">
-    <comment>Ruby source code</comment>
-    <sub-class-of type="text/plain"/>
-    <glob pattern="*.rb"/>
-    <glob pattern="*.rake"/>
-    <glob pattern="*.gemspec"/>
-    <glob pattern="Gemfile" weight="90"/>
-    <glob pattern="Rakefile" weight="90"/>
-  </mime-type>
-  <mime-type type="text/x-perl">
-    <comment>Perl source code</comment>
-    <sub-class-of type="text/plain"/>
-    <glob pattern="*.pl"/>
-    <glob pattern="*.pm"/>
-    <glob pattern="*.pod"/>
-  </mime-type>
-  <mime-type type="text/x-lua">
-    <comment>Lua source code</comment>
-    <sub-class-of type="text/plain"/>
-    <glob pattern="*.lua"/>
-  </mime-type>
-  <mime-type type="text/x-r-source">
-    <comment>R source code</comment>
-    <sub-class-of type="text/plain"/>
-    <glob pattern="*.R"/>
-    <glob pattern="*.r"/>
-  </mime-type>
-  <mime-type type="text/julia">
-    <comment>Julia source code</comment>
-    <sub-class-of type="text/plain"/>
-    <glob pattern="*.jl"/>
-  </mime-type>
-  <mime-type type="text/x-tcl">
-    <comment>Tcl source code</comment>
-    <sub-class-of type="text/plain"/>
-    <glob pattern="*.tcl"/>
-  </mime-type>
-  <mime-type type="text/x-elixir">
-    <comment>Elixir source code</comment>
-    <sub-class-of type="text/plain"/>
-    <glob pattern="*.ex"/>
-    <glob pattern="*.exs"/>
-  </mime-type>
-  <mime-type type="text/x-erlang">
-    <comment>Erlang source code</comment>
-    <sub-class-of type="text/plain"/>
-    <glob pattern="*.erl"/>
-    <glob pattern="*.hrl"/>
-  </mime-type>
-  <mime-type type="text/x-haskell">
-    <comment>Haskell source code</comment>
-    <sub-class-of type="text/plain"/>
-    <glob pattern="*.hs"/>
-    <glob pattern="*.lhs"/>
-  </mime-type>
-  <mime-type type="text/x-ocaml">
-    <comment>OCaml source code</comment>
-    <sub-class-of type="text/plain"/>
-    <glob pattern="*.ml"/>
-    <glob pattern="*.mli"/>
-  </mime-type>
-  <mime-type type="application/vnd.dart">
-    <comment>Dart source code</comment>
-    <sub-class-of type="text/plain"/>
-    <glob pattern="*.dart"/>
-  </mime-type>
-  <mime-type type="text/x-crystal">
-    <comment>Crystal source code</comment>
-    <sub-class-of type="text/plain"/>
-    <glob pattern="*.cr"/>
-  </mime-type>
-  <mime-type type="text/x-nushell">
-    <comment>Nushell source code</comment>
-    <sub-class-of type="text/plain"/>
-    <glob pattern="*.nu"/>
-  </mime-type>
-  <mime-type type="text/x-awk">
-    <comment>AWK source code</comment>
-    <sub-class-of type="text/plain"/>
-    <glob pattern="*.awk"/>
-  </mime-type>
-  <mime-type type="text/x-vim">
-    <comment>Vim script</comment>
-    <sub-class-of type="text/plain"/>
-    <glob pattern="*.vim"/>
-    <glob pattern="vimrc" weight="90"/>
-    <glob pattern=".vimrc" weight="90"/>
-  </mime-type>
+  <mime-type type="application/x-shellscript"><comment>Shell script</comment><sub-class-of type="text/plain"/><glob pattern="*.sh"/></mime-type>
+  <mime-type type="text/x-bash"><comment>Bash script or configuration</comment><sub-class-of type="application/x-shellscript"/><glob pattern="*.bash"/><glob pattern=".bashrc" weight="90"/><glob pattern=".bash_profile" weight="90"/><glob pattern=".bash_logout" weight="90"/></mime-type>
+  <mime-type type="text/x-zsh"><comment>Zsh script or configuration</comment><sub-class-of type="application/x-shellscript"/><glob pattern="*.zsh"/><glob pattern=".zshrc" weight="90"/><glob pattern=".zshenv" weight="90"/><glob pattern=".zprofile" weight="90"/><glob pattern=".zlogin" weight="90"/><glob pattern=".zlogout" weight="90"/></mime-type>
+  <mime-type type="application/x-fishscript"><comment>Fish shell script</comment><sub-class-of type="text/plain"/><glob pattern="*.fish"/></mime-type>
+  <mime-type type="application/x-powershell"><comment>PowerShell source code</comment><sub-class-of type="text/plain"/><glob pattern="*.ps1"/><glob pattern="*.psm1"/><glob pattern="*.psd1"/></mime-type>
+  <mime-type type="application/x-ruby"><comment>Ruby source code</comment><sub-class-of type="text/plain"/><glob pattern="*.rb"/><glob pattern="*.rake"/><glob pattern="*.gemspec"/><glob pattern="Gemfile" weight="90"/><glob pattern="Rakefile" weight="90"/></mime-type>
+  <mime-type type="text/x-perl"><comment>Perl source code</comment><sub-class-of type="text/plain"/><glob pattern="*.pl"/><glob pattern="*.pm"/><glob pattern="*.pod"/></mime-type>
+  <mime-type type="text/x-lua"><comment>Lua source code</comment><sub-class-of type="text/plain"/><glob pattern="*.lua"/></mime-type>
+  <mime-type type="text/x-r-source"><comment>R source code</comment><sub-class-of type="text/plain"/><glob pattern="*.R"/><glob pattern="*.r"/></mime-type>
+  <mime-type type="text/julia"><comment>Julia source code</comment><sub-class-of type="text/plain"/><glob pattern="*.jl"/></mime-type>
+  <mime-type type="text/x-tcl"><comment>Tcl source code</comment><sub-class-of type="text/plain"/><glob pattern="*.tcl"/></mime-type>
+  <mime-type type="text/x-elixir"><comment>Elixir source code</comment><sub-class-of type="text/plain"/><glob pattern="*.ex"/><glob pattern="*.exs"/></mime-type>
+  <mime-type type="text/x-erlang"><comment>Erlang source code</comment><sub-class-of type="text/plain"/><glob pattern="*.erl"/><glob pattern="*.hrl"/></mime-type>
+  <mime-type type="text/x-haskell"><comment>Haskell source code</comment><sub-class-of type="text/plain"/><glob pattern="*.hs"/><glob pattern="*.lhs"/></mime-type>
+  <mime-type type="text/x-ocaml"><comment>OCaml source code</comment><sub-class-of type="text/plain"/><glob pattern="*.ml"/><glob pattern="*.mli"/></mime-type>
+  <mime-type type="application/vnd.dart"><comment>Dart source code</comment><sub-class-of type="text/plain"/><glob pattern="*.dart"/></mime-type>
+  <mime-type type="text/x-crystal"><comment>Crystal source code</comment><sub-class-of type="text/plain"/><glob pattern="*.cr"/></mime-type>
+  <mime-type type="text/x-nushell"><comment>Nushell source code</comment><sub-class-of type="text/plain"/><glob pattern="*.nu"/></mime-type>
+  <mime-type type="text/x-awk"><comment>AWK source code</comment><sub-class-of type="text/plain"/><glob pattern="*.awk"/></mime-type>
+  <mime-type type="text/x-vim"><comment>Vim script</comment><sub-class-of type="text/plain"/><glob pattern="*.vim"/><glob pattern="vimrc" weight="90"/><glob pattern=".vimrc" weight="90"/></mime-type>
 </mime-info>

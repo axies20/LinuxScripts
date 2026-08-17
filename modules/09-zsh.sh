@@ -74,7 +74,12 @@ alias cls='clear'
 EOF_ZRC
 
 if [ "$(basename "${SHELL:-}")" != "zsh" ]; then
-  chsh -s "$(command -v zsh)" || warn "Could not change the default shell automatically."
+  zsh_path="$(command -v zsh)"
+  if sudo usermod --shell "$zsh_path" "$USER"; then
+    echo "Default login shell set to $zsh_path (effective after the next login)."
+  else
+    warn "Could not change the default shell automatically."
+  fi
 fi
 
 echo "Zsh configured. Starship is the default prompt engine and is installed by the next module."

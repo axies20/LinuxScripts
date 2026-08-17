@@ -147,3 +147,36 @@ To see which application is currently the default for the main developer MIME ty
 systemctl --user enable --now podman.socket
 export DOCKER_HOST="unix://$XDG_RUNTIME_DIR/podman/podman.sock"
 ```
+
+## Interactive prompts
+
+A normal full installation is designed to run continuously:
+
+```bash
+./install.sh
+```
+
+You do **not** need to press Enter between modules. The installer authenticates
+with `sudo` once at startup, keeps that authorization alive while it runs, and
+then continues from one module to the next automatically.
+
+The only normal prompt during a full run may be the initial `sudo` password
+request. It is preceded by an explanation in the terminal.
+
+When a module is run directly, for example:
+
+```bash
+./modules/05-podman.sh
+```
+
+that module may request `sudo` once because it was started outside the main
+installer.
+
+The optional Powerlevel10k configurator remains intentionally interactive:
+
+```bash
+./optional/powerlevel10k.sh
+```
+
+because `p10k configure` is a visual configuration wizard. It is not executed
+by the default installation.

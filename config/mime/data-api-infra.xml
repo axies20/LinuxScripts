@@ -1,100 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
-  <mime-type type="application/sql">
-    <comment>SQL source</comment>
-    <sub-class-of type="text/plain"/>
-    <glob pattern="*.sql"/>
-  </mime-type>
-  <mime-type type="application/vnd.sqlite3">
-    <comment>SQLite database</comment>
-    <glob pattern="*.sqlite"/>
-    <glob pattern="*.sqlite3"/>
-  </mime-type>
-  <mime-type type="application/x-duckdb">
-    <comment>DuckDB database</comment>
-    <glob pattern="*.duckdb"/>
-  </mime-type>
-  <mime-type type="application/graphql">
-    <comment>GraphQL document</comment>
-    <sub-class-of type="text/plain"/>
-    <glob pattern="*.graphql"/>
-    <glob pattern="*.gql"/>
-    <glob pattern="*.graphqls"/>
-  </mime-type>
-  <mime-type type="text/x-protobuf">
-    <comment>Protocol Buffers schema</comment>
-    <sub-class-of type="text/plain"/>
-    <glob pattern="*.proto"/>
-  </mime-type>
-  <mime-type type="text/x-http-request">
-    <comment>HTTP request file</comment>
-    <sub-class-of type="text/plain"/>
-    <glob pattern="*.http"/>
-    <glob pattern="*.rest"/>
-  </mime-type>
-  <mime-type type="text/x-hcl">
-    <comment>HashiCorp Configuration Language</comment>
-    <sub-class-of type="text/plain"/>
-    <glob pattern="*.hcl"/>
-    <glob pattern="*.tf"/>
-    <glob pattern="*.tfvars"/>
-    <glob pattern="*.nomad"/>
-  </mime-type>
-  <mime-type type="text/x-packer-hcl">
-    <comment>HashiCorp Packer configuration</comment>
-    <sub-class-of type="text/x-hcl"/>
-    <glob pattern="*.pkr.hcl" weight="90"/>
-    <glob pattern="*.pkrvars.hcl" weight="90"/>
-  </mime-type>
-  <mime-type type="application/x-ndjson">
-    <comment>Newline-delimited JSON</comment>
-    <sub-class-of type="application/json"/>
-    <glob pattern="*.ndjson"/>
-    <glob pattern="*.jsonl"/>
-  </mime-type>
-  <mime-type type="application/vnd.apache.parquet">
-    <comment>Apache Parquet data</comment>
-    <glob pattern="*.parquet"/>
-  </mime-type>
-  <mime-type type="application/vnd.apache.arrow.file">
-    <comment>Apache Arrow file</comment>
-    <glob pattern="*.arrow"/>
-    <glob pattern="*.feather"/>
-  </mime-type>
-  <mime-type type="application/avro">
-    <comment>Apache Avro data</comment>
-    <glob pattern="*.avro"/>
-  </mime-type>
-  <mime-type type="application/x-orc">
-    <comment>Apache ORC data</comment>
-    <glob pattern="*.orc"/>
-  </mime-type>
-  <mime-type type="application/msgpack">
-    <comment>MessagePack data</comment>
-    <glob pattern="*.msgpack"/>
-    <glob pattern="*.mpk"/>
-  </mime-type>
-  <mime-type type="application/cbor">
-    <comment>CBOR data</comment>
-    <glob pattern="*.cbor"/>
-  </mime-type>
-  <mime-type type="application/bson">
-    <comment>BSON data</comment>
-    <glob pattern="*.bson"/>
-  </mime-type>
-  <mime-type type="application/geo+json">
-    <comment>GeoJSON data</comment>
-    <sub-class-of type="application/json"/>
-    <glob pattern="*.geojson"/>
-  </mime-type>
-  <mime-type type="text/x-prisma">
-    <comment>Prisma schema</comment>
-    <sub-class-of type="text/plain"/>
-    <glob pattern="*.prisma"/>
-  </mime-type>
-  <mime-type type="text/x-surrealql">
-    <comment>SurrealQL source</comment>
-    <sub-class-of type="text/plain"/>
-    <glob pattern="*.surql"/>
-  </mime-type>
+  <mime-type type="application/sql"><comment>SQL source</comment><sub-class-of type="text/plain"/><glob pattern="*.sql"/></mime-type>
+  <mime-type type="application/vnd.sqlite3"><comment>SQLite database</comment><glob pattern="*.sqlite"/><glob pattern="*.sqlite3"/></mime-type>
+  <mime-type type="application/x-duckdb"><comment>DuckDB database</comment><glob pattern="*.duckdb"/></mime-type>
+  <mime-type type="application/graphql"><comment>GraphQL document</comment><sub-class-of type="text/plain"/><glob pattern="*.graphql"/><glob pattern="*.gql"/><glob pattern="*.graphqls"/></mime-type>
+  <mime-type type="text/x-protobuf"><comment>Protocol Buffers schema</comment><sub-class-of type="text/plain"/><glob pattern="*.proto"/></mime-type>
+  <mime-type type="text/x-http-request"><comment>HTTP request file</comment><sub-class-of type="text/plain"/><glob pattern="*.http"/><glob pattern="*.rest"/></mime-type>
+  <mime-type type="text/x-hcl"><comment>HashiCorp Configuration Language</comment><sub-class-of type="text/plain"/><glob pattern="*.hcl"/><glob pattern="*.tf"/><glob pattern="*.tfvars"/><glob pattern="*.nomad"/></mime-type>
+  <mime-type type="text/x-packer-hcl"><comment>HashiCorp Packer configuration</comment><sub-class-of type="text/x-hcl"/><glob pattern="*.pkr.hcl" weight="90"/><glob pattern="*.pkrvars.hcl" weight="90"/></mime-type>
+  <mime-type type="application/x-ndjson"><comment>Newline-delimited JSON</comment><sub-class-of type="application/json"/><glob pattern="*.ndjson"/><glob pattern="*.jsonl"/></mime-type>
+  <mime-type type="application/vnd.apache.parquet"><comment>Apache Parquet data</comment><glob pattern="*.parquet"/></mime-type>
+  <mime-type type="application/vnd.apache.arrow.file"><comment>Apache Arrow file</comment><glob pattern="*.arrow"/><glob pattern="*.feather"/></mime-type>
+  <mime-type type="application/avro"><comment>Apache Avro data</comment><glob pattern="*.avro"/></mime-type>
+  <mime-type type="application/x-orc"><comment>Apache ORC data</comment><glob pattern="*.orc"/></mime-type>
+  <mime-type type="application/msgpack"><comment>MessagePack data</comment><glob pattern="*.msgpack"/><glob pattern="*.mpk"/></mime-type>
+  <mime-type type="application/cbor"><comment>CBOR data</comment><glob pattern="*.cbor"/></mime-type>
+  <mime-type type="application/bson"><comment>BSON data</comment><glob pattern="*.bson"/></mime-type>
+  <mime-type type="application/geo+json"><comment>GeoJSON data</comment><sub-class-of type="application/json"/><glob pattern="*.geojson"/></mime-type>
+  <mime-type type="text/x-prisma"><comment>Prisma schema</comment><sub-class-of type="text/plain"/><glob pattern="*.prisma"/></mime-type>
+  <mime-type type="text/x-surrealql"><comment>SurrealQL source</comment><sub-class-of type="text/plain"/><glob pattern="*.surql"/></mime-type>
 </mime-info>

@@ -1,100 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
   <mime-type type="text/javascript">
-    <comment>JavaScript source code</comment>
-    <sub-class-of type="text/plain"/>
-    <glob pattern="*.js"/>
-    <glob pattern="*.mjs"/>
-    <glob pattern="*.cjs"/>
-    <glob pattern="*.jsm"/>
+    <comment>JavaScript source code</comment><sub-class-of type="text/plain"/>
+    <glob pattern="*.js"/><glob pattern="*.mjs"/><glob pattern="*.cjs"/><glob pattern="*.jsm"/>
   </mime-type>
   <mime-type type="text/jsx">
-    <comment>JavaScript JSX source code</comment>
-    <sub-class-of type="text/plain"/>
+    <comment>JavaScript JSX source code</comment><sub-class-of type="text/plain"/>
     <glob pattern="*.jsx"/>
   </mime-type>
   <mime-type type="text/x-typescript">
-    <comment>TypeScript source code</comment>
-    <sub-class-of type="text/plain"/>
-    <glob pattern="*.ts" weight="80"/>
-    <glob pattern="*.mts"/>
-    <glob pattern="*.cts"/>
+    <comment>TypeScript source code</comment><sub-class-of type="text/plain"/>
+    <glob pattern="*.ts" weight="80"/><glob pattern="*.mts"/><glob pattern="*.cts"/>
   </mime-type>
   <mime-type type="text/x-typescript-jsx">
-    <comment>TypeScript JSX source code</comment>
-    <sub-class-of type="text/plain"/>
+    <comment>TypeScript JSX source code</comment><sub-class-of type="text/plain"/>
     <glob pattern="*.tsx" weight="80"/>
   </mime-type>
   <mime-type type="text/x-vue">
-    <comment>Vue single-file component</comment>
-    <sub-class-of type="text/plain"/>
-    <glob pattern="*.vue"/>
+    <comment>Vue single-file component</comment><sub-class-of type="text/plain"/><glob pattern="*.vue"/>
   </mime-type>
   <mime-type type="text/x-svelte">
-    <comment>Svelte component</comment>
-    <sub-class-of type="text/plain"/>
-    <glob pattern="*.svelte"/>
+    <comment>Svelte component</comment><sub-class-of type="text/plain"/><glob pattern="*.svelte"/>
   </mime-type>
   <mime-type type="text/x-astro">
-    <comment>Astro component</comment>
-    <sub-class-of type="text/plain"/>
-    <glob pattern="*.astro"/>
+    <comment>Astro component</comment><sub-class-of type="text/plain"/><glob pattern="*.astro"/>
   </mime-type>
   <mime-type type="application/x-jsonc">
-    <comment>JSON with comments</comment>
-    <sub-class-of type="text/plain"/>
-    <glob pattern="*.jsonc"/>
+    <comment>JSON with comments</comment><sub-class-of type="text/plain"/><glob pattern="*.jsonc"/>
   </mime-type>
   <mime-type type="application/json5">
-    <comment>JSON5 document</comment>
-    <sub-class-of type="text/plain"/>
-    <glob pattern="*.json5"/>
+    <comment>JSON5 document</comment><sub-class-of type="text/plain"/><glob pattern="*.json5"/>
   </mime-type>
   <mime-type type="text/x-less">
-    <comment>LESS stylesheet</comment>
-    <sub-class-of type="text/css"/>
-    <glob pattern="*.less"/>
+    <comment>LESS stylesheet</comment><sub-class-of type="text/css"/><glob pattern="*.less"/>
   </mime-type>
   <mime-type type="text/x-ejs">
-    <comment>Embedded JavaScript template</comment>
-    <sub-class-of type="text/plain"/>
-    <glob pattern="*.ejs"/>
+    <comment>Embedded JavaScript template</comment><sub-class-of type="text/plain"/><glob pattern="*.ejs"/>
   </mime-type>
   <mime-type type="text/x-pug">
-    <comment>Pug template</comment>
-    <sub-class-of type="text/plain"/>
-    <glob pattern="*.pug"/>
-    <glob pattern="*.jade"/>
+    <comment>Pug template</comment><sub-class-of type="text/plain"/><glob pattern="*.pug"/><glob pattern="*.jade"/>
   </mime-type>
   <mime-type type="text/x-npm-config">
-    <comment>Node package manager configuration</comment>
-    <sub-class-of type="text/plain"/>
-    <glob pattern=".npmrc" weight="90"/>
-    <glob pattern=".yarnrc" weight="90"/>
-    <glob pattern=".yarnrc.yml" weight="90"/>
+    <comment>Node package manager configuration</comment><sub-class-of type="text/plain"/>
+    <glob pattern=".npmrc" weight="90"/><glob pattern=".yarnrc" weight="90"/><glob pattern=".yarnrc.yml" weight="90"/>
   </mime-type>
   <mime-type type="text/x-yarn-lock">
-    <comment>Yarn lock file</comment>
-    <sub-class-of type="text/plain"/>
-    <glob pattern="yarn.lock" weight="90"/>
+    <comment>Yarn lock file</comment><sub-class-of type="text/plain"/><glob pattern="yarn.lock" weight="90"/>
   </mime-type>
   <mime-type type="text/x-bun-lock">
-    <comment>Bun lock file</comment>
-    <sub-class-of type="text/plain"/>
-    <glob pattern="bun.lock" weight="90"/>
+    <comment>Bun lock file</comment><sub-class-of type="text/plain"/><glob pattern="bun.lock" weight="90"/>
   </mime-type>
   <mime-type type="application/x-bun-lockb">
-    <comment>Bun binary lock file</comment>
-    <glob pattern="bun.lockb" weight="90"/>
+    <comment>Bun binary lock file</comment><glob pattern="bun.lockb" weight="90"/>
   </mime-type>
   <mime-type type="application/wasm">
-    <comment>WebAssembly binary</comment>
-    <glob pattern="*.wasm"/>
+    <comment>WebAssembly binary</comment><glob pattern="*.wasm"/>
   </mime-type>
   <mime-type type="text/x-webassembly">
-    <comment>WebAssembly text format</comment>
-    <sub-class-of type="text/plain"/>
-    <glob pattern="*.wat"/>
-    <glob pattern="*.wast"/>
+    <comment>WebAssembly text format</comment><sub-class-of type="text/plain"/><glob pattern="*.wat"/><glob pattern="*.wast"/>
   </mime-type>
 </mime-info>

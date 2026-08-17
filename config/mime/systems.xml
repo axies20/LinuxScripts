@@ -1,101 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
-  <mime-type type="text/x-csrc">
-    <comment>C source code</comment>
-    <sub-class-of type="text/plain"/>
-    <glob pattern="*.c"/>
-  </mime-type>
-  <mime-type type="text/x-chdr">
-    <comment>C header</comment>
-    <sub-class-of type="text/plain"/>
-    <glob pattern="*.h"/>
-  </mime-type>
-  <mime-type type="text/x-c++src">
-    <comment>C++ source code</comment>
-    <sub-class-of type="text/plain"/>
-    <glob pattern="*.cc"/>
-    <glob pattern="*.cpp"/>
-    <glob pattern="*.cxx"/>
-    <glob pattern="*.c++"/>
-  </mime-type>
-  <mime-type type="text/x-c++hdr">
-    <comment>C++ header</comment>
-    <sub-class-of type="text/plain"/>
-    <glob pattern="*.hh"/>
-    <glob pattern="*.hpp"/>
-    <glob pattern="*.hxx"/>
-    <glob pattern="*.h++"/>
-  </mime-type>
-  <mime-type type="text/x-objcsrc">
-    <comment>Objective-C source code</comment>
-    <sub-class-of type="text/plain"/>
-    <glob pattern="*.m"/>
-  </mime-type>
-  <mime-type type="text/x-objc++src">
-    <comment>Objective-C++ source code</comment>
-    <sub-class-of type="text/plain"/>
-    <glob pattern="*.mm"/>
-  </mime-type>
-  <mime-type type="text/rust">
-    <comment>Rust source code</comment>
-    <sub-class-of type="text/plain"/>
-    <glob pattern="*.rs"/>
-  </mime-type>
-  <mime-type type="text/x-zig">
-    <comment>Zig source code</comment>
-    <sub-class-of type="text/plain"/>
-    <glob pattern="*.zig"/>
-    <glob pattern="*.zon"/>
-  </mime-type>
-  <mime-type type="text/x-swift">
-    <comment>Swift source code</comment>
-    <sub-class-of type="text/plain"/>
-    <glob pattern="*.swift"/>
-  </mime-type>
-  <mime-type type="text/x-dsrc">
-    <comment>D source code</comment>
-    <sub-class-of type="text/plain"/>
-    <glob pattern="*.d"/>
-    <glob pattern="*.di"/>
-  </mime-type>
-  <mime-type type="text/x-fortran">
-    <comment>Fortran source code</comment>
-    <sub-class-of type="text/plain"/>
-    <glob pattern="*.f"/>
-    <glob pattern="*.for"/>
-    <glob pattern="*.f77"/>
-    <glob pattern="*.f90"/>
-    <glob pattern="*.f95"/>
-    <glob pattern="*.f03"/>
-    <glob pattern="*.f08"/>
-  </mime-type>
-  <mime-type type="text/x-asm">
-    <comment>Assembly source code</comment>
-    <sub-class-of type="text/plain"/>
-    <glob pattern="*.asm"/>
-    <glob pattern="*.s"/>
-    <glob pattern="*.S"/>
-  </mime-type>
-  <mime-type type="text/x-pascal">
-    <comment>Pascal source code</comment>
-    <sub-class-of type="text/plain"/>
-    <glob pattern="*.pas"/>
-    <glob pattern="*.pp"/>
-  </mime-type>
-  <mime-type type="text/x-nim">
-    <comment>Nim source code</comment>
-    <sub-class-of type="text/plain"/>
-    <glob pattern="*.nim"/>
-  </mime-type>
-  <mime-type type="text/x-nimscript">
-    <comment>Nim script</comment>
-    <sub-class-of type="text/plain"/>
-    <glob pattern="*.nims"/>
-    <glob pattern="*.nimble"/>
-  </mime-type>
-  <mime-type type="text/x-solidity">
-    <comment>Solidity source code</comment>
-    <sub-class-of type="text/plain"/>
-    <glob pattern="*.sol"/>
-  </mime-type>
+  <mime-type type="text/x-csrc"><comment>C source code</comment><sub-class-of type="text/plain"/><glob pattern="*.c"/></mime-type>
+  <mime-type type="text/x-chdr"><comment>C header</comment><sub-class-of type="text/plain"/><glob pattern="*.h"/></mime-type>
+  <mime-type type="text/x-c++src"><comment>C++ source code</comment><sub-class-of type="text/plain"/><glob pattern="*.cc"/><glob pattern="*.cpp"/><glob pattern="*.cxx"/><glob pattern="*.c++"/></mime-type>
+  <mime-type type="text/x-c++hdr"><comment>C++ header</comment><sub-class-of type="text/plain"/><glob pattern="*.hh"/><glob pattern="*.hpp"/><glob pattern="*.hxx"/><glob pattern="*.h++"/></mime-type>
+  <mime-type type="text/x-objcsrc"><comment>Objective-C source code</comment><sub-class-of type="text/plain"/><glob pattern="*.m"/></mime-type>
+  <mime-type type="text/x-objc++src"><comment>Objective-C++ source code</comment><sub-class-of type="text/plain"/><glob pattern="*.mm"/></mime-type>
+  <mime-type type="text/rust"><comment>Rust source code</comment><sub-class-of type="text/plain"/><glob pattern="*.rs"/></mime-type>
+  <mime-type type="text/x-zig"><comment>Zig source code</comment><sub-class-of type="text/plain"/><glob pattern="*.zig"/><glob pattern="*.zon"/></mime-type>
+  <mime-type type="text/x-swift"><comment>Swift source code</comment><sub-class-of type="text/plain"/><glob pattern="*.swift"/></mime-type>
+  <mime-type type="text/x-dsrc"><comment>D source code</comment><sub-class-of type="text/plain"/><glob pattern="*.d"/><glob pattern="*.di"/></mime-type>
+  <mime-type type="text/x-fortran"><comment>Fortran source code</comment><sub-class-of type="text/plain"/><glob pattern="*.f"/><glob pattern="*.for"/><glob pattern="*.f77"/><glob pattern="*.f90"/><glob pattern="*.f95"/><glob pattern="*.f03"/><glob pattern="*.f08"/></mime-type>
+  <mime-type type="text/x-asm"><comment>Assembly source code</comment><sub-class-of type="text/plain"/><glob pattern="*.asm"/><glob pattern="*.s"/><glob pattern="*.S"/></mime-type>
+  <mime-type type="text/x-pascal"><comment>Pascal source code</comment><sub-class-of type="text/plain"/><glob pattern="*.pas"/><glob pattern="*.pp"/></mime-type>
+  <mime-type type="text/x-nim"><comment>Nim source code</comment><sub-class-of type="text/plain"/><glob pattern="*.nim"/></mime-type>
+  <mime-type type="text/x-nimscript"><comment>Nim script</comment><sub-class-of type="text/plain"/><glob pattern="*.nims"/><glob pattern="*.nimble"/></mime-type>
+  <mime-type type="text/x-solidity"><comment>Solidity source code</comment><sub-class-of type="text/plain"/><glob pattern="*.sol"/></mime-type>
 </mime-info>
