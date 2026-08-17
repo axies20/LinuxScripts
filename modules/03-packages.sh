@@ -19,10 +19,14 @@ sudo mkdir -p /etc/ssl/certs
 sudo ln -sfn /etc/pki/tls/certs/ca-bundle.crt /etc/ssl/certs/ca-certificates.crt
 
 log "Installing Brave"
-if ! command -v brave-browser >/dev/null 2>&1 && ! command -v brave >/dev/null 2>&1; then
-  curl -fsS https://dl.brave.com/install.sh | sh
-else
-  echo "Brave is already installed."
-fi
 
-install_if_available fontconfig
+if ! command -v brave-browser >/dev/null 2>&1; then
+    if [ ! -f /etc/yum.repos.d/brave-browser.repo ]; then
+        sudo dnf config-manager addrepo \
+            --from-repofile=https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
+    fi
+
+    sudo dnf install -y brave-browser
+else
+    ok "Brave is already installed; skipping"
+fi

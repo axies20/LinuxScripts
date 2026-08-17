@@ -1,6 +1,15 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
 
+if [ "$EUID" -eq 0 ]; then
+    echo "ERROR: Do not run LinuxScripts as root or with sudo."
+    echo
+    echo "Run it as your normal user:"
+    echo "  ./install.sh"
+    echo
+    echo "The installer will request sudo automatically when required."
+    exit 1
+fi
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$ROOT/lib/common.sh"
 
