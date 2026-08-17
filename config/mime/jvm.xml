@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+  <mime-type type="text/x-java">
+    <comment>Java source code</comment>
+    <sub-class-of type="text/plain"/>
+    <glob pattern="*.java"/>
+  </mime-type>
+  <mime-type type="text/x-kotlin">
+    <comment>Kotlin source code</comment>
+    <sub-class-of type="text/plain"/>
+    <glob pattern="*.kt"/>
+    <glob pattern="*.kts"/>
+  </mime-type>
+  <mime-type type="text/x-scala">
+    <comment>Scala source code</comment>
+    <sub-class-of type="text/plain"/>
+    <glob pattern="*.scala"/>
+    <glob pattern="*.sc"/>
+  </mime-type>
+  <mime-type type="text/x-groovy">
+    <comment>Groovy source code</comment>
+    <sub-class-of type="text/plain"/>
+    <glob pattern="*.groovy"/>
+  </mime-type>
+  <mime-type type="text/x-gradle">
+    <comment>Gradle build script</comment>
+    <sub-class-of type="text/plain"/>
+    <glob pattern="*.gradle"/>
+  </mime-type>
+  <mime-type type="text/x-gradle-kotlin">
+    <comment>Gradle Kotlin build script</comment>
+    <sub-class-of type="text/x-kotlin"/>
+    <glob pattern="*.gradle.kts" weight="90"/>
+  </mime-type>
+  <mime-type type="text/x-clojure">
+    <comment>Clojure source code</comment>
+    <sub-class-of type="text/plain"/>
+    <glob pattern="*.clj"/>
+    <glob pattern="*.cljs"/>
+    <glob pattern="*.cljc"/>
+  </mime-type>
+  <mime-type type="application/edn">
+    <comment>Extensible Data Notation</comment>
+    <sub-class-of type="text/plain"/>
+    <glob pattern="*.edn"/>
+  </mime-type>
+  <mime-type type="text/x-jsp">
+    <comment>JavaServer Pages source</comment>
+    <sub-class-of type="text/plain"/>
+    <glob pattern="*.jsp"/>
+    <glob pattern="*.jspx"/>
+  </mime-type>
+</mime-info>

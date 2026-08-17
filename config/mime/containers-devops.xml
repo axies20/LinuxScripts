@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+  <mime-type type="text/x-containerfile">
+    <comment>Container build file</comment>
+    <sub-class-of type="text/plain"/>
+    <glob pattern="Dockerfile" weight="90"/>
+    <glob pattern="Dockerfile.*" weight="80"/>
+    <glob pattern="Containerfile" weight="90"/>
+    <glob pattern="Containerfile.*" weight="80"/>
+  </mime-type>
+  <mime-type type="text/x-container-ignore">
+    <comment>Container ignore file</comment>
+    <sub-class-of type="text/plain"/>
+    <glob pattern=".dockerignore" weight="90"/>
+    <glob pattern=".containerignore" weight="90"/>
+  </mime-type>
+  <mime-type type="application/x-podman-quadlet">
+    <comment>Podman Quadlet unit</comment>
+    <sub-class-of type="text/plain"/>
+    <glob pattern="*.container"/>
+    <glob pattern="*.volume"/>
+    <glob pattern="*.network"/>
+    <glob pattern="*.pod"/>
+    <glob pattern="*.kube"/>
+    <glob pattern="*.image"/>
+    <glob pattern="*.build"/>
+  </mime-type>
+  <mime-type type="application/x-systemd-unit">
+    <comment>systemd unit</comment>
+    <sub-class-of type="text/plain"/>
+    <glob pattern="*.service"/>
+    <glob pattern="*.socket"/>
+    <glob pattern="*.timer"/>
+    <glob pattern="*.target"/>
+    <glob pattern="*.mount"/>
+    <glob pattern="*.automount"/>
+    <glob pattern="*.path"/>
+    <glob pattern="*.slice"/>
+    <glob pattern="*.scope"/>
+  </mime-type>
+</mime-info>

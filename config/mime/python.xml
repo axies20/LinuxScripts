@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+  <mime-type type="text/x-python">
+    <comment>Python source code</comment>
+    <sub-class-of type="text/plain"/>
+    <glob pattern="*.py"/>
+    <glob pattern="*.pyw"/>
+  </mime-type>
+  <mime-type type="text/x-python3">
+    <comment>Python 3 source or stub</comment>
+    <sub-class-of type="text/x-python"/>
+    <glob pattern="*.pyi"/>
+  </mime-type>
+  <mime-type type="text/x-cython">
+    <comment>Cython source code</comment>
+    <sub-class-of type="text/plain"/>
+    <glob pattern="*.pyx"/>
+    <glob pattern="*.pxd"/>
+    <glob pattern="*.pxi"/>
+  </mime-type>
+  <mime-type type="application/x-python-bytecode">
+    <comment>Python bytecode</comment>
+    <glob pattern="*.pyc"/>
+    <glob pattern="*.pyo"/>
+  </mime-type>
+  <mime-type type="application/x-ipynb+json">
+    <comment>Jupyter notebook</comment>
+    <sub-class-of type="application/json"/>
+    <glob pattern="*.ipynb"/>
+  </mime-type>
+  <mime-type type="text/x-python-requirements">
+    <comment>Python requirements file</comment>
+    <sub-class-of type="text/plain"/>
+    <glob pattern="requirements.txt" weight="90"/>
+    <glob pattern="requirements-*.txt" weight="80"/>
+    <glob pattern="constraints.txt" weight="90"/>
+    <glob pattern="constraints-*.txt" weight="80"/>
+  </mime-type>
+</mime-info>

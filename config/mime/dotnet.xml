@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+  <mime-type type="text/x-csharp">
+    <comment>C# source code</comment>
+    <glob pattern="*.cs"/>
+    <glob pattern="*.csx"/>
+  </mime-type>
+  <mime-type type="text/x-fsharp">
+    <comment>F# source code</comment>
+    <glob pattern="*.fs"/>
+    <glob pattern="*.fsi"/>
+    <glob pattern="*.fsx"/>
+  </mime-type>
+  <mime-type type="text/x-vbnet">
+    <comment>Visual Basic .NET source code</comment>
+    <glob pattern="*.vb"/>
+  </mime-type>
+  <mime-type type="application/x-dotnet-project">
+    <comment>.NET project</comment>
+    <sub-class-of type="application/xml"/>
+    <glob pattern="*.csproj"/>
+    <glob pattern="*.fsproj"/>
+    <glob pattern="*.vbproj"/>
+  </mime-type>
+  <mime-type type="text/x-dotnet-solution">
+    <comment>.NET solution</comment>
+    <sub-class-of type="text/plain"/>
+    <glob pattern="*.sln"/>
+  </mime-type>
+  <mime-type type="application/x-dotnet-solution-xml">
+    <comment>.NET XML solution</comment>
+    <sub-class-of type="application/xml"/>
+    <glob pattern="*.slnx"/>
+  </mime-type>
+  <mime-type type="application/x-msbuild-project">
+    <comment>MSBuild project or configuration</comment>
+    <sub-class-of type="application/xml"/>
+    <glob pattern="*.props"/>
+    <glob pattern="*.targets"/>
+    <glob pattern="*.ruleset"/>
+    <glob pattern="Directory.Build.props" weight="90"/>
+    <glob pattern="Directory.Build.targets" weight="90"/>
+    <glob pattern="Directory.Packages.props" weight="90"/>
+  </mime-type>
+  <mime-type type="application/x-dotnet-resource+xml">
+    <comment>.NET resource file</comment>
+    <sub-class-of type="application/xml"/>
+    <glob pattern="*.resx"/>
+    <glob pattern="*.resw"/>
+  </mime-type>
+  <mime-type type="application/x-nuspec+xml">
+    <comment>NuGet package specification</comment>
+    <sub-class-of type="application/xml"/>
+    <glob pattern="*.nuspec"/>
+  </mime-type>
+  <mime-type type="application/x-nuget-package">
+    <comment>NuGet package</comment>
+    <sub-class-of type="application/zip"/>
+    <glob pattern="*.nupkg"/>
+    <glob pattern="*.snupkg"/>
+  </mime-type>
+  <mime-type type="text/x-razor">
+    <comment>Razor component</comment>
+    <sub-class-of type="text/plain"/>
+    <glob pattern="*.razor"/>
+  </mime-type>
+  <mime-type type="text/x-cshtml">
+    <comment>ASP.NET Razor view</comment>
+    <sub-class-of type="text/html"/>
+    <glob pattern="*.cshtml"/>
+  </mime-type>
+</mime-info>

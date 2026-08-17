@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+  <mime-type type="application/hta">
+    <comment>Windows HTML Application</comment>
+    <glob pattern="*.hta"/>
+  </mime-type>
+  <mime-type type="application/opensearchdescription+xml">
+    <comment>OpenSearch description</comment>
+    <glob pattern="*.osdx"/>
+  </mime-type>
+  <mime-type type="application/windows-appcontent+xml">
+    <comment>Windows AppContent file</comment>
+    <glob pattern="*.appcontent-ms"/>
+  </mime-type>
+  <mime-type type="application/x-ms-application">
+    <comment>Windows application deployment manifest</comment>
+    <glob pattern="*.application"/>
+  </mime-type>
+  <mime-type type="application/x-mswebsite">
+    <comment>Windows website shortcut</comment>
+    <glob pattern="*.website"/>
+  </mime-type>
+  <mime-type type="application/x-ms-xbap">
+    <comment>XAML browser application</comment>
+    <glob pattern="*.xbap"/>
+  </mime-type>
+  <mime-type type="application/xaml+xml">
+    <comment>XAML document</comment>
+    <glob pattern="*.xaml"/>
+  </mime-type>
+  <mime-type type="application/vnd.ms-wpl">
+    <comment>Windows Media Player playlist</comment>
+    <glob pattern="*.wpl"/>
+  </mime-type>
+  <mime-type type="application/x-ms-wmd">
+    <comment>Windows Media Download package</comment>
+    <glob pattern="*.wmd"/>
+  </mime-type>
+  <mime-type type="application/x-ms-wmz">
+    <comment>Windows Media Player skin package</comment>
+    <glob pattern="*.wmz"/>
+  </mime-type>
+  <mime-type type="text/x-ms-contact">
+    <comment>Windows Contact</comment>
+    <glob pattern="*.contact"/>
+  </mime-type>
+  <mime-type type="text/scriptlet">
+    <comment>Windows Script Component</comment>
+    <glob pattern="*.wsc"/>
+  </mime-type>
+  <mime-type type="text/x-component">
+    <comment>HTML Component</comment>
+    <glob pattern="*.htc"/>
+  </mime-type>
+  <mime-type type="video/wtv">
+    <comment>Windows Recorded TV</comment>
+    <glob pattern="*.wtv"/>
+  </mime-type>
+  <mime-type type="video/x-ms-dvr">
+    <comment>Windows DVR recording</comment>
+    <glob pattern="*.dvr-ms"/>
+  </mime-type>
+</mime-info>

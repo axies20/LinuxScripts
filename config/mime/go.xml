@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+  <mime-type type="text/x-go">
+    <comment>Go source code</comment>
+    <sub-class-of type="text/plain"/>
+    <glob pattern="*.go"/>
+  </mime-type>
+  <mime-type type="text/x-go-mod">
+    <comment>Go module file</comment>
+    <sub-class-of type="text/plain"/>
+    <glob pattern="go.mod" weight="90"/>
+    <glob pattern="go.work" weight="90"/>
+  </mime-type>
+  <mime-type type="text/x-go-sum">
+    <comment>Go checksum file</comment>
+    <sub-class-of type="text/plain"/>
+    <glob pattern="go.sum" weight="90"/>
+    <glob pattern="go.work.sum" weight="90"/>
+  </mime-type>
+</mime-info>

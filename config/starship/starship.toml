@@ -1,0 +1,43 @@
+# Minimal development-oriented Starship prompt for Fedora/.NET/Aspire.
+add_newline = true
+command_timeout = 1000
+
+format = """\
+$directory\
+$git_branch\
+$git_status\
+$dotnet\
+$nodejs\
+$container\
+$cmd_duration\
+$line_break\
+$character"""
+
+[directory]
+truncation_length = 4
+truncate_to_repo = false
+
+[git_branch]
+format = " [$symbol$branch]($style)"
+symbol = "git:"
+
+[git_status]
+format = "([$all_status$ahead_behind]($style))"
+
+[dotnet]
+format = " [.NET $version]($style)"
+
+[nodejs]
+format = " [Node $version]($style)"
+
+[container]
+format = " [$symbol$name]($style)"
+symbol = "container:"
+
+[cmd_duration]
+min_time = 2000
+format = " [$duration]($style)"
+
+[character]
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"

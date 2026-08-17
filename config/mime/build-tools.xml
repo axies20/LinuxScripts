@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+  <mime-type type="text/x-makefile">
+    <comment>Make build file</comment>
+    <sub-class-of type="text/plain"/>
+    <glob pattern="Makefile" weight="90"/>
+    <glob pattern="makefile" weight="90"/>
+    <glob pattern="GNUmakefile" weight="90"/>
+    <glob pattern="*.mk"/>
+  </mime-type>
+  <mime-type type="text/x-cmake">
+    <comment>CMake source</comment>
+    <sub-class-of type="text/plain"/>
+    <glob pattern="CMakeLists.txt" weight="90"/>
+    <glob pattern="*.cmake"/>
+  </mime-type>
+  <mime-type type="text/x-just">
+    <comment>Just command runner file</comment>
+    <sub-class-of type="text/plain"/>
+    <glob pattern="Justfile" weight="90"/>
+    <glob pattern="justfile" weight="90"/>
+    <glob pattern="*.just"/>
+  </mime-type>
+  <mime-type type="text/x-procfile">
+    <comment>Procfile process definition</comment>
+    <sub-class-of type="text/plain"/>
+    <glob pattern="Procfile" weight="90"/>
+    <glob pattern="Procfile.*" weight="80"/>
+  </mime-type>
+  <mime-type type="text/x-meson">
+    <comment>Meson build definition</comment>
+    <sub-class-of type="text/plain"/>
+    <glob pattern="meson.build" weight="90"/>
+    <glob pattern="meson_options.txt" weight="90"/>
+  </mime-type>
+  <mime-type type="text/x-ninja">
+    <comment>Ninja build definition</comment>
+    <sub-class-of type="text/plain"/>
+    <glob pattern="*.ninja"/>
+    <glob pattern="build.ninja" weight="90"/>
+  </mime-type>
+  <mime-type type="text/x-bazel">
+    <comment>Bazel/Starlark build definition</comment>
+    <sub-class-of type="text/plain"/>
+    <glob pattern="*.bzl"/>
+    <glob pattern="BUILD" weight="90"/>
+    <glob pattern="BUILD.bazel" weight="90"/>
+    <glob pattern="WORKSPACE" weight="90"/>
+    <glob pattern="WORKSPACE.bazel" weight="90"/>
+    <glob pattern="MODULE.bazel" weight="90"/>
+  </mime-type>
+</mime-info>

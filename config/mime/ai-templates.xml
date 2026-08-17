@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+  <mime-type type="text/x-jinja">
+    <comment>Jinja template</comment>
+    <sub-class-of type="text/plain"/>
+    <glob pattern="*.jinja"/>
+    <glob pattern="*.jinja2"/>
+    <glob pattern="*.j2"/>
+  </mime-type>
+  <mime-type type="text/x-handlebars">
+    <comment>Handlebars template</comment>
+    <sub-class-of type="text/plain"/>
+    <glob pattern="*.hbs"/>
+    <glob pattern="*.handlebars"/>
+  </mime-type>
+  <mime-type type="text/x-mustache">
+    <comment>Mustache template</comment>
+    <sub-class-of type="text/plain"/>
+    <glob pattern="*.mustache"/>
+  </mime-type>
+  <mime-type type="text/x-liquid">
+    <comment>Liquid template</comment>
+    <sub-class-of type="text/plain"/>
+    <glob pattern="*.liquid"/>
+  </mime-type>
+  <mime-type type="text/x-prompty">
+    <comment>Prompty AI prompt file</comment>
+    <sub-class-of type="text/plain"/>
+    <glob pattern="*.prompty"/>
+  </mime-type>
+  <mime-type type="text/x-prompt">
+    <comment>AI prompt source</comment>
+    <sub-class-of type="text/plain"/>
+    <glob pattern="*.prompt"/>
+  </mime-type>
+</mime-info>
