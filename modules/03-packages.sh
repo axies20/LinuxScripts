@@ -6,9 +6,9 @@ require_fedora; require_sudo
 
 log "Installing base tools and applications"
 sudo dnf install -y \
-  git gedit curl wget vim nano net-tools zip unzip tar jq ripgrep fd-find fzf bat tmux \
+  git gedit curl wget vim nano net-tools zip unzip tar xz jq ripgrep fd-find fzf bat tmux \
   git-delta code yq openssl-devel libicu gnome-tweaks steam fastfetch java-latest-openjdk \
-  ca-certificates p11-kit p11-kit-trust nss-tools openssl powerline-fonts dnf-plugins-core \
+  ca-certificates p11-kit p11-kit-trust nss-tools openssl fontconfig powerline-fonts dnf-plugins-core \
   kernel-devel kernel-headers gcc make flatpak 1password
 
 install_if_available eza exa

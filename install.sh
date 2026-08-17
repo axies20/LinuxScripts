@@ -16,13 +16,14 @@ modules=(
   07-aspire
   08-node-codex
   09-zsh
-  10-starship
-  11-gnome
-  12-nautilus
-  13-flatpak
-  14-nvidia
-  15-mime
-  16-finalize
+  10-nerd-fonts
+  11-starship
+  12-gnome
+  13-nautilus
+  14-flatpak
+  15-nvidia
+  16-mime
+  17-finalize
 )
 
 if [ "$#" -gt 0 ]; then

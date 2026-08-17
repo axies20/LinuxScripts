@@ -9,6 +9,7 @@ Modular Fedora Workstation bootstrap for a .NET/Aspire development machine.
 - Aspire CLI with `ASPIRE_CONTAINER_RUNTIME=podman` and Linux certificate trust path.
 - Node.js/npm with a user-owned npm prefix, then OpenAI Codex CLI.
 - Zsh + Oh My Zsh with Starship as the default prompt.
+- JetBrainsMono, FiraCode and Meslo Nerd Fonts installed per-user for terminal/IDE glyph support.
 - Powerlevel10k is kept as an optional alternative in `optional/powerlevel10k.sh`.
 - GNOME, Nautilus, Flatpak apps, RPM Fusion codecs and optional NVIDIA drivers.
 - Local user MIME pack for developer formats and selected Windows formats.
@@ -25,8 +26,31 @@ chmod +x install.sh modules/*.sh diagnostics/*.sh optional/*.sh
 
 ```bash
 ./install.sh 05-podman 06-dotnet 07-aspire
-./install.sh 09-zsh 10-starship
-./install.sh 15-mime
+./install.sh 09-zsh 10-nerd-fonts 11-starship
+./install.sh 16-mime
+```
+
+
+## Nerd Fonts
+
+The default install adds three Nerd Font families for the current user:
+
+- **JetBrainsMono Nerd Font** — recommended default for the terminal and IDE console.
+- **FiraCode Nerd Font** — alternative programming font with ligatures.
+- **Meslo Nerd Font** — useful with the optional Powerlevel10k prompt.
+
+They are installed under:
+
+```text
+~/.local/share/fonts/NerdFonts/
+```
+
+The installer prefers the compact Nerd Fonts `tar.xz` release archives and falls back to ZIP when needed. The font cache is refreshed automatically with `fc-cache`. The setup deliberately does not change the GNOME interface font or force a terminal profile font. Select **JetBrainsMono Nerd Font** (preferably a Mono variant when your terminal exposes one) in the terminal settings.
+
+To install only a subset, override `NERD_FONTS`:
+
+```bash
+NERD_FONTS="JetBrainsMono FiraCode" ./install.sh 10-nerd-fonts
 ```
 
 ## Zsh and prompt
