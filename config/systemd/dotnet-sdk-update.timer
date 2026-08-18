@@ -1,0 +1,10 @@
+[Unit]
+Description=Check weekly for a new stable .NET 10 SDK
+
+[Timer]
+OnCalendar=weekly
+Persistent=true
+RandomizedDelaySec=6h
+
+[Install]
+WantedBy=timers.target

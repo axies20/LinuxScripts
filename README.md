@@ -5,7 +5,7 @@ Modular Fedora Workstation bootstrap for a .NET/Aspire development machine.
 ## Main choices
 
 - Podman instead of Docker Engine; rootless/daemonless by default.
-- .NET 10 SDK from Fedora repositories.
+- Latest stable .NET 10 SDK from Microsoft, installed system-wide and updated weekly by a systemd timer.
 - Aspire CLI installed as the `Aspire.Cli` .NET global tool.
 - Aspire configured for Podman and Linux development-certificate trust.
 - Node.js/npm with a user-owned npm prefix, then OpenAI Codex CLI.
@@ -42,6 +42,30 @@ List all current modules:
 ```
 
 Old numbered names are also resolved by semantic name when possible, but scripts and documentation should use stable names.
+
+## System .NET SDK
+
+.NET is installed from Microsoft's official release binaries into:
+
+```text
+/usr/local/share/dotnet
+```
+
+`/usr/local/bin/dotnet` points to that installation. The
+`dotnet-sdk-update.timer` systemd timer checks weekly for the latest stable SDK
+in the .NET 10 channel. It stages and verifies a complete new installation
+before replacing the previous version, so obsolete SDK feature bands do not
+accumulate.
+
+Run an update immediately or inspect the timer with:
+
+```bash
+sudo systemctl start dotnet-sdk-update.service
+systemctl status dotnet-sdk-update.timer
+```
+
+In Rider, use `/usr/local/bin/dotnet` as the .NET CLI executable and disable
+automatic SDK downloads.
 
 ## Zsh and prompt
 

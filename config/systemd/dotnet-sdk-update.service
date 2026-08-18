@@ -1,0 +1,13 @@
+[Unit]
+Description=Update the system-wide .NET 10 SDK from Microsoft
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/update-dotnet-sdk
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+ReadWritePaths=/usr/local/bin /usr/local/share

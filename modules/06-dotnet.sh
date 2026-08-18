@@ -4,8 +4,38 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 source "$ROOT/lib/common.sh"
 require_fedora; require_sudo
 
-log "Installing .NET 10 SDK from Fedora repositories"
-sudo dnf install -y dotnet-sdk-10.0
+log "Installing the system-wide .NET 10 SDK updater"
+sudo install -Dm755 \
+  "$ROOT/system/update-dotnet-sdk.sh" \
+  /usr/local/sbin/update-dotnet-sdk
+sudo install -Dm644 \
+  "$ROOT/config/systemd/dotnet-sdk-update.service" \
+  /etc/systemd/system/dotnet-sdk-update.service
+sudo install -Dm644 \
+  "$ROOT/config/systemd/dotnet-sdk-update.timer" \
+  /etc/systemd/system/dotnet-sdk-update.timer
+
+log "Installing the latest stable .NET 10 SDK from Microsoft"
+sudo /usr/local/sbin/update-dotnet-sdk
+
+mapfile -t packaged_dotnet < <(
+  rpm -qa --qf '%{NAME}\n' |
+    awk '/^(dotnet|aspnetcore|netstandard)(-|$)/' |
+    sort -u
+)
+if [ "${#packaged_dotnet[@]}" -gt 0 ]; then
+  log "Removing superseded Fedora .NET packages"
+  sudo dnf remove -y "${packaged_dotnet[@]}"
+fi
+
+sudo systemctl daemon-reload
+sudo systemctl enable --now dotnet-sdk-update.timer
+
+export PATH="/usr/local/bin:$PATH"
+if [ "$(readlink -f "$(command -v dotnet)")" != "/usr/local/share/dotnet/dotnet" ]; then
+  err "The Microsoft .NET installation is not first on PATH."
+  exit 1
+fi
 
 mkdir -p "$HOME/.dotnet/tools"
 append_line_once 'export PATH="$HOME/.dotnet/tools:$PATH"' "$HOME/.bashrc"
