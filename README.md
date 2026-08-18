@@ -83,6 +83,9 @@ Every run of the `starship` module applies it to:
 ```
 
 An existing configuration is backed up with a timestamp before replacement.
+The module also reruns the official Starship installer, so an existing older
+binary is upgraded to the latest release in `~/.local/bin`. If the update
+server is temporarily unavailable, an already installed Starship is retained.
 
 Zsh automatically selects the full configuration at 90 columns or wider and
 the compact configuration below 90 columns. The compact profile replaces

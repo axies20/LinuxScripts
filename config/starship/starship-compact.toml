@@ -105,12 +105,11 @@ home_symbol = "~"
 
 read_only = " "
 
-substitutions = [
-  { from = "Documents", to = "󰈙 " },
-  { from = "Downloads", to = " " },
-  { from = "Pictures", to = " " },
-  { from = "Projects", to = "󰲋 " },
-]
+[directory.substitutions]
+"Documents" = "󰈙 "
+"Downloads" = " "
+"Pictures" = " "
+"Projects" = "󰲋 "
 
 # ------------------------------------------------------------
 # Git branch

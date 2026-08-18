@@ -18,15 +18,25 @@ if [ -e "$HOME/.oh-my-zsh/custom/themes/powerlevel10k" ] ||
   "$ROOT/modules/09-zsh.sh"
 fi
 
-if ! command -v starship >/dev/null 2>&1; then
-  if dnf -q info starship >/dev/null 2>&1; then
-    sudo dnf install -y starship
-  else
-    warn "Fedora package 'starship' is unavailable; using the official user-local installer."
-    mkdir -p "$HOME/.local/bin"
-    curl -fsSL https://starship.rs/install.sh | sh -s -- --yes --bin-dir "$HOME/.local/bin"
-  fi
+# The official installer installs the latest release and updates an existing
+# binary when rerun. A user-local binary takes precedence over an older Fedora
+# package because ~/.local/bin is prepended to PATH above.
+mkdir -p "$HOME/.local/bin"
+starship_tmp="$(mktemp -d)"
+starship_installer="$starship_tmp/install.sh"
+
+if curl -fsSL https://starship.rs/install.sh -o "$starship_installer"; then
+  sh "$starship_installer" --yes --bin-dir "$HOME/.local/bin"
+elif command -v starship >/dev/null 2>&1; then
+  warn "Could not check for a Starship update; keeping $(starship --version | head -n1)."
+else
+  rm -rf -- "$starship_tmp"
+  err "Could not download the official Starship installer."
+  exit 1
 fi
+
+rm -rf -- "$starship_tmp"
+hash -r
 
 mkdir -p "$HOME/.config"
 if [ -f "$HOME/.config/starship.toml" ]; then
