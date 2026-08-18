@@ -26,6 +26,27 @@ sudo dnf install -y \
   util-linux-user
 
 # ---------------------------------------------------------------------------
+# Remove legacy Powerlevel10k
+# ---------------------------------------------------------------------------
+
+log "Removing legacy Powerlevel10k files"
+
+P10K_THEME="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
+P10K_CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}"
+rm -rf -- \
+  "$P10K_THEME" \
+  "$HOME/.p10k.zsh" \
+  "$HOME/.p10k.zsh.zwc"
+
+if [ -d "$P10K_CACHE_DIR" ]; then
+  find "$P10K_CACHE_DIR" -mindepth 1 -maxdepth 1 \
+    \( -name 'p10k-*' -o -name 'p10k-instant-prompt-*' \) \
+    -exec rm -rf -- {} +
+fi
+
+ok "Powerlevel10k files removed"
+
+# ---------------------------------------------------------------------------
 # Oh My Zsh
 # ---------------------------------------------------------------------------
 
@@ -149,7 +170,6 @@ export PATH="$HOME/.local/bin:$HOME/.local/npm/bin:$HOME/.dotnet/tools:$PATH"
 export ASPIRE_CONTAINER_RUNTIME=podman
 unset SSL_CERT_DIR
 
-export FEDORA_PROMPT_ENGINE="${FEDORA_PROMPT_ENGINE:-starship}"
 EOF_ZENV
 
 # ---------------------------------------------------------------------------
@@ -163,14 +183,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # Prompt
 # ---------------------------------------------------------------------------
 
-FEDORA_PROMPT_ENGINE="${FEDORA_PROMPT_ENGINE:-starship}"
-
-if [[ "$FEDORA_PROMPT_ENGINE" == "powerlevel10k" ]] &&
-   [[ -d "$HOME/.oh-my-zsh/custom/themes/powerlevel10k" ]]; then
-  ZSH_THEME="powerlevel10k/powerlevel10k"
-else
-  ZSH_THEME=""
-fi
+ZSH_THEME=""
 
 # ---------------------------------------------------------------------------
 # Oh My Zsh plugins
@@ -204,13 +217,10 @@ source "$ZSH/oh-my-zsh.sh"
 # Prompt engine
 # ---------------------------------------------------------------------------
 
-if [[ "$FEDORA_PROMPT_ENGINE" == "starship" ]]; then
-  if command -v starship >/dev/null 2>&1; then
-    eval "$(starship init zsh)"
-  fi
+[[ -r "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/starship-adaptive.zsh" ]] && source "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/starship-adaptive.zsh"
 
-elif [[ "$FEDORA_PROMPT_ENGINE" == "powerlevel10k" ]]; then
-  [[ -f "$HOME/.p10k.zsh" ]] && source "$HOME/.p10k.zsh"
+if command -v starship >/dev/null 2>&1; then
+  eval "$(starship init zsh)"
 fi
 
 # ---------------------------------------------------------------------------

@@ -83,4 +83,4 @@ if command -v fc-list >/dev/null 2>&1; then
   done
 fi
 
-echo "Choose a Nerd Font in your terminal profile. MesloLGS NF is recommended for Powerlevel10k."
+echo "Choose one of the installed Nerd Fonts in your terminal profile."

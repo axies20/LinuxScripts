@@ -10,7 +10,6 @@ Modular Fedora Workstation bootstrap for a .NET/Aspire development machine.
 - Aspire configured for Podman and Linux development-certificate trust.
 - Node.js/npm with a user-owned npm prefix, then OpenAI Codex CLI.
 - Zsh + Oh My Zsh with Starship as the default prompt.
-- Powerlevel10k is kept as an optional alternative in `optional/powerlevel10k.sh`.
 - Nerd Fonts: JetBrainsMono, FiraCode and MesloLGS NF.
 - GNOME, Nautilus, Flatpak apps, RPM Fusion codecs and optional NVIDIA drivers.
 - Local user MIME catalog for development languages/tools and selected Windows formats.
@@ -69,43 +68,34 @@ automatic SDK downloads.
 
 ## Zsh and prompt
 
-Starship is selected by default through:
-
-```bash
-export FEDORA_PROMPT_ENGINE="starship"
-```
-
-The repository includes a development-oriented configuration at:
+Starship is the only configured prompt engine. The repository includes its
+development-oriented configuration at:
 
 ```text
 config/starship/starship.toml
+config/starship/starship-compact.toml
 ```
 
-On first install it is copied to:
+Every run of the `starship` module applies it to:
 
 ```text
 ~/.config/starship.toml
 ```
 
-If a Starship configuration already exists, it is left untouched.
+An existing configuration is backed up with a timestamp before replacement.
 
-To install and switch to Powerlevel10k instead:
+Zsh automatically selects the full configuration at 90 columns or wider and
+the compact configuration below 90 columns. The compact profile replaces
+standard directory names such as `Downloads` and `Documents` with Nerd Font
+icons. Resizing the terminal refreshes the prompt automatically.
 
-```bash
-./optional/powerlevel10k.sh
-```
-
-Then open a new terminal and run:
-
-```bash
-p10k configure
-```
-
-To switch back to Starship:
+If Powerlevel10k is detected, the installer automatically removes its theme,
+configuration and cache, backs up the existing Zsh files, rebuilds the Zsh
+configuration, and selects Starship. This migration also runs when installing
+only the Starship module:
 
 ```bash
-sed -i 's/FEDORA_PROMPT_ENGINE="powerlevel10k"/FEDORA_PROMPT_ENGINE="starship"/' ~/.zshenv
-exec zsh
+./install.sh starship
 ```
 
 ## Aspire
@@ -176,7 +166,7 @@ Default families:
 
 - JetBrainsMono Nerd Font
 - FiraCode Nerd Font
-- MesloLGS NF (recommended for Powerlevel10k)
+- MesloLGS NF
 
 Run:
 

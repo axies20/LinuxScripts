@@ -1,5 +1,7 @@
 "$schema" = "https://starship.rs/config-schema.json"
 
+# Compact profile selected automatically for terminals narrower than 90 columns.
+
 # Не добавлять пустую строку между командами.
 add_newline = false
 
@@ -92,7 +94,7 @@ style = "bold fg:#f5f5f5 bg:#1e78e4"
 format = "[   $path ]($style)"
 
 # ~/R/BrokerTaxReport вместо слишком длинного полного пути.
-truncation_length = 4
+truncation_length = 3
 truncate_to_repo = false
 
 # Если путь обрезан:
@@ -102,6 +104,13 @@ truncation_symbol = "…/"
 home_symbol = "~"
 
 read_only = " "
+
+substitutions = [
+  { from = "Documents", to = "󰈙 " },
+  { from = "Downloads", to = " " },
+  { from = "Pictures", to = " " },
+  { from = "Projects", to = "󰲋 " },
+]
 
 # ------------------------------------------------------------
 # Git branch
