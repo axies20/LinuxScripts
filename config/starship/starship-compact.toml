@@ -28,6 +28,7 @@ $git_branch\
 $git_state\
 $git_status\
 [](fg:#f2c811))\
+${custom.directory_tail}\
 $character"""
 
 # Правая часть.
@@ -109,6 +110,12 @@ read_only = " "
 "Downloads" = " "
 "Pictures" = " "
 "Projects" = "󰲋 "
+
+# Острый синий край, когда жёлтый Git-блок отсутствует.
+[custom.directory_tail]
+when = '''! git rev-parse --is-inside-work-tree >/dev/null 2>&1'''
+command = "printf tail"
+format = "[](fg:#1e78e4)"
 
 # ------------------------------------------------------------
 # Git branch
