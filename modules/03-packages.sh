@@ -8,7 +8,8 @@ log "Checking base tools and applications"
 install_packages_if_missing \
   git gedit curl wget vim nano net-tools zip unzip tar jq ripgrep fd-find fzf bat tmux \
   git-delta code yq openssl-devel libicu gnome-tweaks steam fastfetch java-latest-openjdk \
-  ca-certificates p11-kit p11-kit-trust nss-tools openssl powerline-fonts dnf-plugins-core \
+  ca-certificates p11-kit p11-kit-trust nss-tools openssl powerline-fonts \
+  rsms-inter-vf-fonts rsms-inter-fonts dnf-plugins-core \
   kernel-devel kernel-headers gcc make flatpak 1password
 
 install_if_available eza exa

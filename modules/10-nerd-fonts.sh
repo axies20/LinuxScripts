@@ -76,8 +76,8 @@ for font in "${fonts[@]}"; do
 done
 
 if [ "$fonts_changed" -eq 1 ] && command -v fc-cache >/dev/null 2>&1; then
-  log "Refreshing font cache"
-  fc-cache -f "$FONT_ROOT" >/dev/null
+  log "Refreshing system and user font caches"
+  fc-cache -f >/dev/null
 elif [ "$fonts_changed" -eq 0 ]; then
   ok "All requested Nerd Fonts are already installed; font cache unchanged"
 else
@@ -96,4 +96,31 @@ if command -v fc-list >/dev/null 2>&1; then
   done
 fi
 
-echo "Choose one of the installed Nerd Fonts in your terminal profile."
+log "Configuring GNOME preferred fonts"
+if command -v gsettings >/dev/null 2>&1; then
+  if fc-list : family 2>/dev/null | grep -Fi 'Inter' >/dev/null; then
+    if gsettings set org.gnome.desktop.interface font-name 'Inter 11' &&
+       gsettings set org.gnome.desktop.interface document-font-name 'Inter 12'; then
+      ok "GNOME interface font set to Inter Regular 11; document font set to Inter Regular 12"
+    else
+      warn "Could not update GNOME interface and document fonts."
+    fi
+  else
+    warn "Inter is not installed; GNOME interface and document fonts were not changed."
+  fi
+
+  if fc-list : family 2>/dev/null | grep -Fi 'JetBrainsMono Nerd Font' >/dev/null; then
+    if gsettings set org.gnome.desktop.interface monospace-font-name \
+        'JetBrainsMono Nerd Font 11'; then
+      ok "GNOME monospace font set to JetBrainsMono Nerd Font Regular 11"
+    else
+      warn "Could not update the GNOME monospace font."
+    fi
+  else
+    warn "JetBrainsMono Nerd Font is not installed; GNOME monospace font was not changed."
+  fi
+else
+  warn "gsettings is unavailable; GNOME preferred fonts were not changed."
+fi
+
+echo "The terminal profile may need its font configured separately."
