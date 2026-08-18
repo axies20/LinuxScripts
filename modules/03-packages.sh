@@ -4,8 +4,8 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 source "$ROOT/lib/common.sh"
 require_fedora; require_sudo
 
-log "Installing base tools and applications"
-sudo dnf install -y \
+log "Checking base tools and applications"
+install_packages_if_missing \
   git gedit curl wget vim nano net-tools zip unzip tar jq ripgrep fd-find fzf bat tmux \
   git-delta code yq openssl-devel libicu gnome-tweaks steam fastfetch java-latest-openjdk \
   ca-certificates p11-kit p11-kit-trust nss-tools openssl powerline-fonts dnf-plugins-core \

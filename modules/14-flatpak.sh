@@ -5,7 +5,7 @@ source "$ROOT/lib/common.sh"
 require_fedora; require_sudo
 
 log "Configuring Flathub"
-sudo dnf install -y flatpak
+install_packages_if_missing flatpak
 if ! flatpak remotes --system --columns=name | grep -qx flathub; then
   sudo flatpak remote-add --system --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 fi
@@ -26,5 +26,9 @@ apps=(
 
 log "Installing Flatpak applications"
 for app in "${apps[@]}"; do
-  sudo flatpak install --system -y --noninteractive flathub "$app" || warn "Could not install Flatpak $app"
+  if flatpak info --system "$app" >/dev/null 2>&1; then
+    ok "$app is already installed; skipping"
+  else
+    sudo flatpak install --system -y --noninteractive flathub "$app" || warn "Could not install Flatpak $app"
+  fi
 done

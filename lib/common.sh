@@ -41,12 +41,35 @@ append_line_once() {
 install_if_available() {
     local package
     for package in "$@"; do
-        if dnf -q info "$package" >/dev/null 2>&1; then
+        if rpm -q "$package" >/dev/null 2>&1; then
+            ok "$package is already installed; skipping"
+        elif dnf -q info "$package" >/dev/null 2>&1; then
             sudo dnf install -y "$package"
         else
             warn "Package '$package' is unavailable; skipping."
         fi
     done
+}
+
+install_packages_if_missing() {
+    local package
+    local missing=()
+
+    for package in "$@"; do
+        if rpm -q "$package" >/dev/null 2>&1; then
+            ok "$package is already installed; skipping"
+        else
+            missing+=("$package")
+        fi
+    done
+
+    if [ "${#missing[@]}" -eq 0 ]; then
+        ok "All requested packages are already installed"
+        return 0
+    fi
+
+    log "Installing missing packages: ${missing[*]}"
+    sudo dnf install -y "${missing[@]}"
 }
 
 dotnet_global_tool_version() {

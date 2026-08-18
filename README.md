@@ -24,6 +24,12 @@ chmod +x install.sh modules/*.sh diagnostics/*.sh optional/*.sh
 
 The full installer is non-interactive between modules. It may request the sudo password once at the beginning, then continues automatically.
 
+Modules are safe to rerun: installed RPM packages, Nerd Fonts, Flatpak apps,
+Oh My Zsh plugins, GNOME extensions, and configured repositories are detected
+and skipped instead of being downloaded or installed again. Components with an
+explicit update policy, such as Starship, .NET, Aspire, and Codex, only update
+when their module determines that an update is needed or requested.
+
 ## Run selected modules
 
 Module numbers are only installation order. Prefer stable names:

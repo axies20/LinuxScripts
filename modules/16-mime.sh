@@ -6,7 +6,7 @@ require_fedora
 
 if ! command -v update-mime-database >/dev/null 2>&1; then
   require_sudo
-  sudo dnf install -y shared-mime-info
+  install_packages_if_missing shared-mime-info
 fi
 
 mime_home="${XDG_DATA_HOME:-$HOME/.local/share}/mime"

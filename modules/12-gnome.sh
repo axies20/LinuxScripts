@@ -9,7 +9,7 @@ require_sudo
 
 log "Installing GNOME tools"
 
-sudo dnf install -y \
+install_packages_if_missing \
   gnome-tweaks \
   jq \
   curl \
@@ -51,11 +51,19 @@ tmp="$(mktemp -d)"
 trap 'rm -rf "$tmp"' EXIT
 
 installed_extensions=()
+existing_extensions=()
 skipped_extensions=()
 failed_extensions=()
 
 for extension in "${extensions[@]}"; do
   log "GNOME extension: $extension"
+
+  extension_dir="$HOME/.local/share/gnome-shell/extensions/$extension"
+  if [ -d "$extension_dir" ]; then
+    ok "$extension is already installed; skipping download"
+    existing_extensions+=("$extension")
+    continue
+  fi
 
   json="$(
     curl \
@@ -119,8 +127,6 @@ for extension in "${extensions[@]}"; do
     continue
   fi
 
-  extension_dir="$HOME/.local/share/gnome-shell/extensions/$extension"
-
   if [ ! -d "$extension_dir" ]; then
     warn "$extension was not found in $extension_dir after installation"
     failed_extensions+=("$extension")
@@ -132,9 +138,10 @@ for extension in "${extensions[@]}"; do
 done
 
 # GNOME Shell will discover newly installed extensions on the next session.
-# Add their UUIDs to the enabled list now so they are enabled after login.
-if [ "${#installed_extensions[@]}" -gt 0 ]; then
-  log "Scheduling installed extensions to be enabled on next GNOME session"
+# Add both new and pre-existing UUIDs to the enabled list without reinstalling.
+extensions_to_enable=("${installed_extensions[@]}" "${existing_extensions[@]}")
+if [ "${#extensions_to_enable[@]}" -gt 0 ]; then
+  log "Ensuring GNOME extensions are enabled on the next session"
 
   current="$(
     gsettings get org.gnome.shell enabled-extensions 2>/dev/null ||
@@ -142,7 +149,7 @@ if [ "${#installed_extensions[@]}" -gt 0 ]; then
   )"
 
   new_list="$(
-    python3 - "$current" "${installed_extensions[@]}" <<'PY'
+    python3 - "$current" "${extensions_to_enable[@]}" <<'PY'
 import ast
 import sys
 
@@ -187,6 +194,11 @@ echo "------------------------------------"
 printf 'Installed: %d\n' "${#installed_extensions[@]}"
 for extension in "${installed_extensions[@]}"; do
   printf '  ✓ %s\n' "$extension"
+done
+
+printf '\nAlready installed: %d\n' "${#existing_extensions[@]}"
+for extension in "${existing_extensions[@]}"; do
+  printf '  = %s\n' "$extension"
 done
 
 printf '\nSkipped (not compatible with GNOME %s): %d\n' \

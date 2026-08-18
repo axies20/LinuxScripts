@@ -5,7 +5,7 @@ source "$ROOT/lib/common.sh"
 require_fedora; require_sudo
 
 log "Installing rootless Podman toolchain"
-sudo dnf install -y podman podman-compose buildah skopeo
+install_packages_if_missing podman podman-compose buildah skopeo
 install_if_available podman-tui
 
 podman --version

@@ -8,7 +8,7 @@ require_fedora
 require_sudo
 
 log "Installing Node.js and npm"
-sudo dnf install -y nodejs npm
+install_packages_if_missing nodejs npm
 
 log "Using a user-owned npm global prefix"
 

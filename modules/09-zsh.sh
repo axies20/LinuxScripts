@@ -19,7 +19,7 @@ require_sudo
 
 log "Installing Zsh + Oh My Zsh"
 
-sudo dnf install -y \
+install_packages_if_missing \
   zsh \
   git \
   curl \
