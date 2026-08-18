@@ -15,6 +15,16 @@ _starship_select_config
 autoload -Uz add-zsh-hook
 add-zsh-hook precmd _starship_select_config
 
+# Starship calculates these values in its own precmd hook. This file is sourced
+# after `starship init zsh`, so exporting them here makes them available to the
+# custom success/error duration modules.
+_starship_export_duration_state() {
+  export STARSHIP_TAIL_DURATION="${STARSHIP_DURATION:-0}"
+  export STARSHIP_TAIL_STATUS="${STARSHIP_CMD_STATUS:-0}"
+}
+
+add-zsh-hook precmd _starship_export_duration_state
+
 TRAPWINCH() {
   _starship_select_config
   if [[ -o zle ]]; then

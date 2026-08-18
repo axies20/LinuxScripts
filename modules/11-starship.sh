@@ -52,8 +52,19 @@ cp -f "$ROOT/config/zsh/starship-adaptive.zsh" \
   "$HOME/.config/zsh/starship-adaptive.zsh"
 
 adaptive_source='[[ -r "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/starship-adaptive.zsh" ]] && source "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/starship-adaptive.zsh"'
-if [ -f "$HOME/.zshrc" ] && ! grep -Fqx "$adaptive_source" "$HOME/.zshrc"; then
-  printf '\n%s\n' "$adaptive_source" >> "$HOME/.zshrc"
+if [ -f "$HOME/.zshrc" ]; then
+  zshrc_tmp="$(mktemp)"
+  grep -Fvx "$adaptive_source" "$HOME/.zshrc" > "$zshrc_tmp" || true
+  printf '%s\n' "$adaptive_source" >> "$zshrc_tmp"
+
+  if ! cmp -s "$zshrc_tmp" "$HOME/.zshrc"; then
+    backup="$HOME/.zshrc.bak.starship.$(date +%Y%m%d-%H%M%S)"
+    log "Backing up Zsh configuration to $backup"
+    cp -f "$HOME/.zshrc" "$backup"
+    cp -f "$zshrc_tmp" "$HOME/.zshrc"
+  fi
+
+  rm -f -- "$zshrc_tmp"
 fi
 
 starship --version

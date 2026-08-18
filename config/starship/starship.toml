@@ -1,7 +1,7 @@
 "$schema" = "https://starship.rs/config-schema.json"
 
-# Не добавлять пустую строку между командами.
-add_newline = false
+# Отделять новый prompt пустой строкой.
+add_newline = true
 
 # Основной prompt.
 #
@@ -43,10 +43,9 @@ $kubernetes\
 $aws\
 $gcloud\
 $azure\
-$cmd_duration\
-$status\
-$battery\
-$time"""
+${custom.duration_success}\
+${custom.duration_error}\
+$battery"""
 
 
 # ------------------------------------------------------------
@@ -212,14 +211,10 @@ disabled = false
 # При успешной команде вообще ничего не показываем.
 success_symbol = ""
 
-# Для ошибки:
+# Для ошибки показываем только значок, без числового exit code.
 symbol = "✕"
 
-# Красный Powerline-блок справа:
-#
-#               255 ✕
-#
-format = "[](fg:#d92d3a)[ $status $symbol ](bold fg:#ffffff bg:#d92d3a)"
+format = "[](fg:#d92d3a)[ $symbol ](bold fg:#ffffff bg:#d92d3a)"
 
 # Не заменять код 255 названием ошибки.
 map_symbol = false
@@ -241,9 +236,18 @@ min_time = 2000
 
 show_milliseconds = false
 
-# Пример:
-#  17s
-format = "[  $duration](bold #e6b422) "
+# Зелёный Powerline-хвост справа: 3s, 2m 10s и т. п.
+format = "[](fg:#2ea043)[ $duration ](bold fg:#ffffff bg:#2ea043)"
+
+[custom.duration_success]
+when = '''test "${STARSHIP_TAIL_DURATION:-0}" -ge 2000 && test "${STARSHIP_TAIL_STATUS:-0}" -eq 0'''
+command = '''seconds=$((${STARSHIP_TAIL_DURATION:-0} / 1000)); if [ "$seconds" -ge 60 ]; then printf '%dm %ds' "$((seconds / 60))" "$((seconds % 60))"; else printf '%ds' "$seconds"; fi'''
+format = "[](fg:#2ea043)[ $output ](bold fg:#ffffff bg:#2ea043)"
+
+[custom.duration_error]
+when = '''test "${STARSHIP_TAIL_DURATION:-0}" -ge 2000 && test "${STARSHIP_TAIL_STATUS:-0}" -ne 0'''
+command = '''seconds=$((${STARSHIP_TAIL_DURATION:-0} / 1000)); if [ "$seconds" -ge 60 ]; then printf '%dm %ds' "$((seconds / 60))" "$((seconds % 60))"; else printf '%ds' "$seconds"; fi'''
+format = "[](fg:#d92d3a)[ $output ✕ ](bold fg:#ffffff bg:#d92d3a)"
 
 
 # ------------------------------------------------------------
@@ -353,8 +357,3 @@ format = "[$symbol$account(@$domain)(\\($project\\))](bold #4285f4) "
 disabled = false
 symbol = "󰠅 "
 format = "[$symbol($subscription)](bold #0089d6) "
-
-[time]
-disabled = false
-time_format = "%H:%M"
-format = "[  $time](bold #8b949e)"

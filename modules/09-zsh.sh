@@ -217,11 +217,11 @@ source "$ZSH/oh-my-zsh.sh"
 # Prompt engine
 # ---------------------------------------------------------------------------
 
-[[ -r "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/starship-adaptive.zsh" ]] && source "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/starship-adaptive.zsh"
-
 if command -v starship >/dev/null 2>&1; then
   eval "$(starship init zsh)"
 fi
+
+[[ -r "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/starship-adaptive.zsh" ]] && source "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/starship-adaptive.zsh"
 
 # ---------------------------------------------------------------------------
 # History
