@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+  <mime-type type="text/x-ini">
+    <comment>INI configuration</comment><sub-class-of type="text/plain"/>
+    <glob pattern="*.ini"/><glob pattern="*.cfg"/><glob pattern="*.conf"/><glob pattern="*.config"/>
+  </mime-type>
+  <mime-type type="application/toml">
+    <comment>TOML configuration</comment><sub-class-of type="text/plain"/>
+    <glob pattern="*.toml"/>
+  </mime-type>
+  <mime-type type="text/x-java-properties">
+    <comment>Properties configuration</comment><sub-class-of type="text/plain"/>
+    <glob pattern="*.properties"/><glob pattern="*.prefs"/>
+  </mime-type>
+  <mime-type type="text/x-log">
+    <comment>Log output</comment><sub-class-of type="text/plain"/>
+    <glob pattern="*.log"/><glob pattern="*.trace"/>
+  </mime-type>
+</mime-info>

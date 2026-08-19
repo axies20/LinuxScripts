@@ -39,6 +39,15 @@ declare -A samples=(
   [Taskfile.yml]='version: "3"'
   [compose.yml]='services: {}'
   [docker-compose.yml]='services: {}'
+  [settings.ini]='[general]'
+  [application.cfg]='enabled=true'
+  [server.conf]='port=8080'
+  [tool.config]='mode=development'
+  [application.log]='started'
+  [request.trace]='GET /'
+  [settings.toml]='enabled = true'
+  [application.properties]='enabled=true'
+  [user.prefs]='theme=dark'
 )
 
 printf '%-22s %s\n' FILE MIME

@@ -163,6 +163,11 @@ empty `.md` uses the default Markdown application.
 
 The Windows list is intentionally not copied verbatim: legacy aliases such as multiple MIME names for MP3/PNG/AVI are left to Fedora/shared-mime-info. `windows-extra.xml` focuses on Windows-specific formats useful for Nautilus recognition.
 
+Common text configuration and diagnostic files are covered as well, including
+`.ini`, `.cfg`, `.conf`, `.config`, `.toml`, `.properties`, `.prefs`, `.log`,
+and `.trace`. This also makes empty files with these extensions open through
+their configured text application.
+
 ## Nerd Fonts
 
 The `nerd-fonts` module installs user-local fonts into:

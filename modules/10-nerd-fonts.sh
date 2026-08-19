@@ -96,19 +96,8 @@ if command -v fc-list >/dev/null 2>&1; then
   done
 fi
 
-log "Configuring GNOME preferred fonts"
+log "Configuring GNOME monospace font"
 if command -v gsettings >/dev/null 2>&1; then
-  if fc-list : family 2>/dev/null | grep -Fi 'Inter' >/dev/null; then
-    if gsettings set org.gnome.desktop.interface font-name 'Inter 11' &&
-       gsettings set org.gnome.desktop.interface document-font-name 'Inter 12'; then
-      ok "GNOME interface font set to Inter Regular 11; document font set to Inter Regular 12"
-    else
-      warn "Could not update GNOME interface and document fonts."
-    fi
-  else
-    warn "Inter is not installed; GNOME interface and document fonts were not changed."
-  fi
-
   if fc-list : family 2>/dev/null | grep -Fi 'JetBrainsMono Nerd Font' >/dev/null; then
     if gsettings set org.gnome.desktop.interface monospace-font-name \
         'JetBrainsMono Nerd Font 11'; then
@@ -120,7 +109,7 @@ if command -v gsettings >/dev/null 2>&1; then
     warn "JetBrainsMono Nerd Font is not installed; GNOME monospace font was not changed."
   fi
 else
-  warn "gsettings is unavailable; GNOME preferred fonts were not changed."
+  warn "gsettings is unavailable; the GNOME monospace font was not changed."
 fi
 
 echo "The terminal profile may need its font configured separately."
