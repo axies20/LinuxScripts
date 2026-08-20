@@ -27,7 +27,7 @@ add-zsh-hook precmd _starship_export_duration_state
 
 TRAPWINCH() {
   _starship_select_config
-  if [[ -o zle ]]; then
+  if [[ -n ${ZLE_STATE-} ]]; then
     zle reset-prompt
   fi
 }
