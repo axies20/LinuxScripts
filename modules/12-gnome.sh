@@ -187,6 +187,23 @@ PY
   fi
 fi
 
+gtk4_ding_dir="$HOME/.local/share/gnome-shell/extensions/gtk4-ding@smedius.gitlab.com"
+ptyxis_desktop="/usr/share/applications/org.gnome.Ptyxis.desktop"
+
+if [ -d "$gtk4_ding_dir" ]; then
+  if command -v ptyxis >/dev/null 2>&1 && [ -f "$ptyxis_desktop" ]; then
+    terminal_config_dir="${XDG_CONFIG_HOME:-$HOME/.config}"
+    terminal_config="$terminal_config_dir/xdg-terminals.list"
+
+    log "Configuring Fedora Terminal for Gtk4 DING"
+    mkdir -p "$terminal_config_dir"
+    printf '%s\n' 'org.gnome.Ptyxis.desktop' > "$terminal_config"
+    ok "Gtk4 DING will open Fedora Terminal (Ptyxis)"
+  else
+    warn "Gtk4 DING is installed, but Fedora Terminal (Ptyxis) is unavailable; skipping terminal configuration."
+  fi
+fi
+
 echo
 echo "GNOME extension installation summary"
 echo "------------------------------------"
