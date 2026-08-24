@@ -45,6 +45,7 @@ extensions=(
   fullscreen-avoider@noobsai.github.com
   gnome-fuzzy-app-search@gnome-shell-extensions.Czarlie.gitlab.com
   gamebar-overlay@dekotale.github.io
+  quick-sound-switcher@dustin-hawkins
 )
 
 tmp="$(mktemp -d)"
