@@ -234,8 +234,8 @@ fi
 # History
 # ---------------------------------------------------------------------------
 
-HISTSIZE=10000
-SAVEHIST=10000
+HISTSIZE=100000
+SAVEHIST=100000
 HISTFILE="$HOME/.zsh_history"
 
 setopt HIST_IGNORE_DUPS
@@ -247,6 +247,10 @@ setopt SHARE_HISTORY
 
 zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+
+zstyle ':autocomplete:history-search-backward:*' list-lines 10
+
+zstyle ':autocomplete:history-incremental-search-backward:*' list-lines 2000
 
 if [[ -n "${LS_COLORS:-}" ]]; then
   zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
