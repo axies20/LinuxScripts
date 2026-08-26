@@ -190,15 +190,22 @@ ZSH_THEME=""
 # ---------------------------------------------------------------------------
 
 plugins=(
+  gh
   git
+  gitignore
+  git-commit
   git-auto-fetch
 
   npm
+  node
+  ssh
+  dnf
   sudo
   podman
   dotnet
-  pip
-  kubectl
+  python
+
+  encode64
 
   aliases
   colorize
