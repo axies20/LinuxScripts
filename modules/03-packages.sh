@@ -31,8 +31,6 @@ uv python install --default
 
 log "Refreshing CA trust"
 sudo update-ca-trust
-sudo mkdir -p /etc/ssl/certs
-sudo ln -sfn /etc/pki/tls/certs/ca-bundle.crt /etc/ssl/certs/ca-certificates.crt
 
 log "Installing Brave"
 
