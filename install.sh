@@ -30,14 +30,26 @@ modules=(
   14-flatpak
   15-nvidia
   16-mime
-  17-finalize
+  17-dev-icons
+  19-finalize
+)
+
+# Optional modules are discoverable by name but are not run during the default
+# unattended bootstrap. dev-icons-color is interactive when explicitly chosen.
+optional_modules=(
+  18-dev-icons-color
 )
 
 list_modules() {
   echo "Available modules:"
   local module
   for module in "${modules[@]}"; do
-    printf '  %-18s  alias: %s\n' "$module" "${module#*-}"
+    printf '  %-20s  alias: %s\n' "$module" "${module#*-}"
+  done
+  echo
+  echo "Optional modules:"
+  for module in "${optional_modules[@]}"; do
+    printf '  %-20s  alias: %s\n' "$module" "${module#*-}"
   done
 }
 
@@ -51,7 +63,6 @@ resolve_module() {
   fi
 
   # Numeric prefixes are installation order, not stable identifiers.
-  # 10-starship and starship both resolve to the current *-starship.sh.
   local semantic="$requested"
   if [[ "$semantic" =~ ^[0-9]+-(.+)$ ]]; then
     semantic="${BASH_REMATCH[1]}"
@@ -86,7 +97,9 @@ fi
 
 require_fedora
 
+explicit_modules=0
 if [ "$#" -gt 0 ]; then
+  explicit_modules=1
   requested_modules=()
   for requested in "$@"; do
     if ! resolved="$(resolve_module "$requested")"; then
@@ -137,10 +150,19 @@ trap cleanup EXIT INT TERM
 for module in "${modules[@]}"; do
   script="$ROOT/modules/$module.sh"
   log "Running $module"
-  if ! bash "$script" </dev/null; then
+
+  # The color selector is optional and intentionally interactive only when the
+  # user explicitly asks for it. The normal full bootstrap remains unattended.
+  if [ "$module" = "18-dev-icons-color" ] && [ "$explicit_modules" -eq 1 ]; then
+    if ! bash "$script"; then
+      err "$module failed."
+      exit 1
+    fi
+  elif ! bash "$script" </dev/null; then
     err "$module failed. The installer stopped instead of waiting for hidden input."
     exit 1
   fi
+
   ok "$module completed — continuing automatically"
 done
 
