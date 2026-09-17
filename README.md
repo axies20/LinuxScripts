@@ -13,6 +13,7 @@ Modular Fedora Workstation bootstrap for a .NET/Aspire development machine.
 - Nerd Fonts: JetBrainsMono, FiraCode and MesloLGS NF.
 - GNOME, Nautilus, Flatpak apps, RPM Fusion codecs and optional NVIDIA drivers.
 - Local user MIME catalog for development languages/tools and selected Windows formats.
+- GNOME-style monochrome developer MIME icons generated from Nerd Fonts symbols.
 - No automatic reboot.
 
 ## Run everything
@@ -22,7 +23,7 @@ chmod +x install.sh modules/*.sh diagnostics/*.sh optional/*.sh
 ./install.sh
 ```
 
-The full installer is non-interactive between modules. It may request the sudo password once at the beginning, then continues automatically.
+The full installer is non-interactive between modules. It may request the sudo password once at the beginning, then continues automatically. The optional developer-icon color selector is not run by the default bootstrap.
 
 Modules are safe to rerun: installed RPM packages, Nerd Fonts, Flatpak apps,
 Oh My Zsh plugins, GNOME extensions, and configured repositories are detected
@@ -37,10 +38,11 @@ Module numbers are only installation order. Prefer stable names:
 ```bash
 ./install.sh podman dotnet aspire
 ./install.sh zsh nerd-fonts starship
-./install.sh mime
+./install.sh mime dev-icons
+./install.sh dev-icons-color
 ```
 
-List all current modules:
+List all current modules, including optional modules:
 
 ```bash
 ./install.sh --list
@@ -167,6 +169,39 @@ Common text configuration and diagnostic files are covered as well, including
 `.ini`, `.cfg`, `.conf`, `.config`, `.toml`, `.properties`, `.prefs`, `.log`,
 and `.trace`. This also makes empty files with these extensions open through
 their configured text application.
+
+## Developer MIME icons
+
+`dev-icons` generates monochrome developer MIME icons at install time. SVG files are not stored in this repository. The module downloads a pinned Nerd Fonts Symbols Only release, resolves every MIME type from `config/mime/*.xml` through `config/dev-icons.tsv`, exports the required glyph geometry, and installs the generated icons under the user's `hicolor` icon theme.
+
+```bash
+./install.sh dev-icons
+```
+
+Running `dev-icons` again always restores the neutral monochrome style.
+
+Color is deliberately a separate optional module:
+
+```bash
+./install.sh dev-icons-color
+```
+
+It presents a selector and can be rerun whenever you want to switch styles:
+
+1. Monochrome — neutral GNOME-like icons.
+2. Brand colors — individual accents for C#, Python, Docker, Git, and other technologies.
+3. Custom color — one `#RRGGBB` color for the complete developer icon set.
+4. Keep the current style.
+
+The chosen style is stored in `~/.config/fedora-setup/dev-icons-style`. For automation, the selector can be bypassed:
+
+```bash
+DEV_ICON_STYLE=brand ./install.sh dev-icons-color
+DEV_ICON_STYLE=monochrome ./install.sh dev-icons-color
+DEV_ICON_STYLE=custom DEV_ICON_COLOR=#3584E4 ./install.sh dev-icons-color
+```
+
+The color module is optional and is therefore not part of the default unattended bootstrap.
 
 ## Nerd Fonts
 
