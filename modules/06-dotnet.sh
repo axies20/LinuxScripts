@@ -4,19 +4,16 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 source "$ROOT/lib/common.sh"
 require_fedora; require_sudo
 
-log "Installing the system-wide .NET 10 SDK updater"
-sudo install -Dm755 \
-  "$ROOT/system/update-dotnet-sdk.sh" \
-  /usr/local/sbin/update-dotnet-sdk
-sudo install -Dm644 \
-  "$ROOT/config/systemd/dotnet-sdk-update.service" \
-  /etc/systemd/system/dotnet-sdk-update.service
-sudo install -Dm644 \
-  "$ROOT/config/systemd/dotnet-sdk-update.timer" \
-  /etc/systemd/system/dotnet-sdk-update.timer
+dotnet_manager_repo="https://github.com/axies20/DotnetManager.git"
+dotnet_manager_dir="$(mktemp -d)"
+cleanup() {
+  rm -rf -- "$dotnet_manager_dir"
+}
+trap cleanup EXIT INT TERM
 
-log "Installing the latest stable .NET 10 SDK from Microsoft"
-sudo /usr/local/sbin/update-dotnet-sdk
+log "Installing DotnetManager and the configured system-wide .NET SDKs"
+git clone --depth 1 "$dotnet_manager_repo" "$dotnet_manager_dir/DotnetManager"
+bash "$dotnet_manager_dir/DotnetManager/install.sh"
 
 mapfile -t packaged_dotnet < <(
   rpm -qa --qf '%{NAME}\n' |
@@ -28,12 +25,14 @@ if [ "${#packaged_dotnet[@]}" -gt 0 ]; then
   sudo dnf remove -y "${packaged_dotnet[@]}"
 fi
 
-sudo systemctl daemon-reload
-sudo systemctl enable --now dotnet-sdk-update.timer
-
 export PATH="/usr/local/bin:$PATH"
 if [ "$(readlink -f "$(command -v dotnet)")" != "/usr/local/share/dotnet/dotnet" ]; then
   err "The Microsoft .NET installation is not first on PATH."
+  exit 1
+fi
+
+if [ "$(command -v dotnet-manager)" != "/usr/local/bin/dotnet-manager" ]; then
+  err "DotnetManager is not available from /usr/local/bin."
   exit 1
 fi
 

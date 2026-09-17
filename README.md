@@ -5,7 +5,7 @@ Modular Fedora Workstation bootstrap for a .NET/Aspire development machine.
 ## Main choices
 
 - Podman instead of Docker Engine; rootless/daemonless by default.
-- Latest stable .NET 10 SDK from Microsoft, installed system-wide and updated weekly by a systemd timer.
+- Microsoft .NET SDKs managed system-wide by [DotnetManager](https://github.com/axies20/DotnetManager), with stable .NET 10 installed by default.
 - Aspire CLI installed as the `Aspire.Cli` .NET global tool.
 - Aspire configured for Podman and Linux development-certificate trust.
 - Node.js/npm with a user-owned npm prefix, then OpenAI Codex CLI.
@@ -58,18 +58,26 @@ Old numbered names are also resolved by semantic name when possible, but scripts
 /usr/local/share/dotnet
 ```
 
-`/usr/local/bin/dotnet` points to that installation. The
-`dotnet-sdk-update.timer` systemd timer checks weekly for the latest stable SDK
-in the .NET 10 channel. It stages and verifies a complete new installation
-before replacing the previous version, so obsolete SDK feature bands do not
-accumulate.
+`/usr/local/bin/dotnet` points to that installation. The `dotnet` module clones
+and installs [DotnetManager](https://github.com/axies20/DotnetManager), whose
+default configuration tracks the stable .NET 10 channel. DotnetManager can
+track multiple numbered, LTS, STS, Go Live, preview, or pinned SDK sources and
+atomically rebuilds the managed installation without accumulating obsolete
+feature bands.
 
-Run an update immediately or inspect the timer with:
+List the configured SDK sources, install another channel, update immediately,
+or inspect the weekly timer with:
 
 ```bash
-sudo systemctl start dotnet-sdk-update.service
-systemctl status dotnet-sdk-update.timer
+dotnet-manager list
+sudo dotnet-manager install --channel 11.0 --policy go-live
+sudo dotnet-manager update
+systemctl status dotnet-manager-update.timer
 ```
+
+SDK sources are stored in `/etc/dotnet-manager/sources.conf`. Native Zsh and Oh
+My Zsh completion for `dotnet-manager` is installed system-wide; restart Zsh to
+load it after the first installation.
 
 In Rider, use `/usr/local/bin/dotnet` as the .NET CLI executable and disable
 automatic SDK downloads.
