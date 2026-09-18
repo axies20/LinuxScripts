@@ -59,4 +59,8 @@
     <comment>Cake build script</comment><sub-class-of type="text/x-csharp"/>
     <glob pattern="*.cake"/>
   </mime-type>
+  <mime-type type="application/x-jetbrains-dotsettings+xml">
+    <comment>JetBrains Rider solution settings</comment><sub-class-of type="application/xml"/>
+    <glob pattern="*.DotSettings" weight="80"/><glob pattern="*.DotSettings.user" weight="90"/>
+  </mime-type>
 </mime-info>

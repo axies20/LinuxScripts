@@ -19,7 +19,6 @@ modules=(
   03-packages
   04-codecs
   05-podman
-  06-dotnet
   07-aspire
   08-node-codex
   09-zsh
