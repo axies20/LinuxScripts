@@ -5,7 +5,7 @@ Modular Fedora Workstation bootstrap for a .NET/Aspire development machine.
 ## Main choices
 
 - Podman instead of Docker Engine; rootless/daemonless by default.
-- Microsoft .NET SDKs managed system-wide by [DotnetManager](https://github.com/axies20/DotnetManager), with stable .NET 10 installed by default.
+- Microsoft .NET SDKs managed per-user by [dnm](https://github.com/dnm-project/DotnetManager), with the latest LTS and STS SDKs installed by default.
 - Aspire CLI installed as the `Aspire.Cli` .NET global tool.
 - Aspire configured for Podman and Linux development-certificate trust.
 - Node.js/npm with a user-owned npm prefix, then OpenAI Codex CLI.
@@ -50,37 +50,44 @@ List all current modules, including optional modules:
 
 Old numbered names are also resolved by semantic name when possible, but scripts and documentation should use stable names.
 
-## System .NET SDK
+## .NET SDKs managed by dnm
 
-.NET is installed from Microsoft's official release binaries into:
+.NET is installed from Microsoft's official release binaries into the current
+user's managed installation:
 
 ```text
-/usr/local/share/dotnet
+~/.dotnet
 ```
 
-`/usr/local/bin/dotnet` points to that installation. The `dotnet` module clones
-and installs [DotnetManager](https://github.com/axies20/DotnetManager), whose
-default configuration tracks the stable .NET 10 channel. DotnetManager can
-track multiple numbered, LTS, STS, Go Live, preview, or pinned SDK sources and
-atomically rebuilds the managed installation without accumulating obsolete
-feature bands.
-
-List the configured SDK sources, install another channel, update immediately,
-or inspect the weekly timer with:
+The `dotnet` module installs [dnm](https://github.com/dnm-project/DotnetManager)
+into `~/.dotnet-manager`, exposes it as `~/.local/bin/dnm`, and then installs
+the latest LTS and STS SDK releases:
 
 ```bash
-dotnet-manager list
-sudo dotnet-manager install --channel 11.0 --policy go-live
-sudo dotnet-manager update
-systemctl status dotnet-manager-update.timer
+dnm install latest --release-type Lts
+dnm install latest --release-type Sts
 ```
 
-SDK sources are stored in `/etc/dotnet-manager/sources.conf`. Native Zsh and Oh
-My Zsh completion for `dotnet-manager` is installed system-wide; restart Zsh to
-load it after the first installation.
+Use `dnm available` to browse releases and `dnm list` to inspect installed SDKs,
+runtimes, and hosts. Restart the shell after the first installation if `dnm` or
+the managed `dotnet` executable is not yet on `PATH`.
 
-In Rider, use `/usr/local/bin/dotnet` as the .NET CLI executable and disable
-automatic SDK downloads.
+When the previous LinuxScripts `dotnet-manager` installation is detected, the
+module disables its update timer and removes its system-wide CLI, managed SDK
+directory, configuration, and completion after the new LTS and STS SDKs have
+been installed successfully.
+
+In Rider, use `~/.dotnet/dotnet` as the .NET CLI executable and disable automatic
+SDK downloads.
+
+## Blur My Shell helper library
+
+The `gnome` module installs the `gnome-rounded-blur` library required for Blur
+My Shell's rounded dynamic-blur corners. On Fedora it enables the
+`ublue-os/packages` COPR, disables that repository globally, and enables it only
+for installing this package, following the upstream Blur My Shell guide. The
+library must be updated or rebuilt after GNOME Shell or Mutter updates when the
+installed build is no longer compatible.
 
 ## Zsh and prompt
 

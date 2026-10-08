@@ -35,6 +35,18 @@ shell_major="$(
 log "Detected $shell_version"
 echo "GNOME Shell major version: $shell_major"
 
+if rpm -q gnome-rounded-blur >/dev/null 2>&1; then
+  ok "gnome-rounded-blur is already installed; skipping"
+else
+  log "Installing the gnome-rounded-blur library required by Blur My Shell"
+  sudo dnf -y copr enable ublue-os/packages
+  sudo dnf config-manager setopt \
+    copr:copr.fedorainfracloud.org:ublue-os:packages.enabled=0
+  sudo dnf -y \
+    --enablerepo copr:copr.fedorainfracloud.org:ublue-os:packages \
+    install gnome-rounded-blur
+fi
+
 extensions=(
   blur-my-shell@aunetx
   dash-to-dock@micxgx.gmail.com

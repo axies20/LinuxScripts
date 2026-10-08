@@ -19,6 +19,7 @@ modules=(
   03-packages
   04-codecs
   05-podman
+  06-dotnet
   07-aspire
   08-node-codex
   09-zsh
@@ -131,7 +132,8 @@ export FEDORA_SETUP_SUDO_READY=1
 export FEDORA_SETUP_NONINTERACTIVE=1
 export GIT_TERMINAL_PROMPT=0
 export NPM_CONFIG_YES=true
-export PATH="$HOME/.local/bin:$HOME/.local/npm/bin:$HOME/.dotnet/tools:$PATH"
+export DOTNET_ROOT="$HOME/.dotnet"
+export PATH="$HOME/.local/bin:$HOME/.local/npm/bin:$DOTNET_ROOT:$DOTNET_ROOT/tools:$PATH"
 
 (
   while true; do
